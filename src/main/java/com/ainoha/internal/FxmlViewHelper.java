@@ -58,7 +58,7 @@ public final class FxmlViewHelper {
      *
      * @param controllerClass Clase del controllador de la vista que se desea mostrar. Esta clase debe estar anotada con
      *                        {@code @}{@link FxmlController} y dicha anotación debe definir obligatoriamente el valor
-     *                        del parámetro {@coed fxmlPath}.
+     *                        del parámetro {@code fxmlPath}.
      * @param viewStage Stage (escenario) donde se debe mostrar la vista. Si es {@code null} se creará uno.
      * @param owner Stage (escenario) propietario de la vista que se desea mostrar. Si es {@code null} no se definirá.
      * @param params Se usa para pasar parámetros a la nueva vista.
@@ -154,7 +154,7 @@ public final class FxmlViewHelper {
      *
      * @param controller Controllador de la vista que se desea mostrar. La calse de este objeto debe estar anotada con
      *                   {@code @}{@link FxmlController} y dicha anotación debe definir obligatoriamente el valor
-     *                   del parámetro {@coed fxmlPath}.
+     *                   del parámetro {@code fxmlPath}.
      *
      * @param fully Si es {@code true} se procesarán todos los miembros anotados, en caso contrario solo se procesarán los
      *              atributos.
