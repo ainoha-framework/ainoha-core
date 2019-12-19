@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 /**
  * Permite agregar a cada una de las columnas del {@link javafx.scene.control.TableView} anotado un {@code CellValueFactory}
  * para hacer un binding con una propiedad dentro de una clase usada como modelo. Para lograr que el binding funcione,
- * el valor del atributo {@link javafx.scene.control.TableColumn#id} de cada columna debe coincidir con el nombre de la
+ * el valor del campo {@link javafx.scene.control.TableColumn#id} de cada columna debe coincidir con el nombre de la
  * propiedad con la que se desea hacer el binding dentro del modelo.<br>
  * <br>
  * En otras palabras, esta anotación permite definir automáticamente el binding de las columnas de una tabla con las

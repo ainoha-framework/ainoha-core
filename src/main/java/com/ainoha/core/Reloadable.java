@@ -45,7 +45,7 @@ public interface Reloadable {
      * debe tener una referencia al {@link Stage} de la vista. Si alguna de las condiciones anteriore no se cumple, el
      * método no ejecutará el proceso de recarga así como ninguno de los procesos asociados.<br>
      * <br>
-     * Además de recarar la vista, la llamada a este método procesará nuevamente todos los campos anotados del controlador.<br>
+     * Además de recargar la vista, la llamada a este método procesará nuevamente todos los campos anotados del controlador.<br>
      * <br>
      * Este método resulta útil cuando cambia el idioma de la aplicación y se necesita actualizar el idioma de los textos
      * en la pantalla.
@@ -56,7 +56,7 @@ public interface Reloadable {
 
     /**
      * Recarga completamente la interfaz de usuario vinculada al controlador que implemente esta interfaz. Con "completamente"
-     * se quiere decir que se procesarán todos los miembros anotaciones, tanto atributos como métodos.<br>
+     * se quiere decir que se procesarán todos los miembros anotaciones, tanto campos como métodos.<br>
      * <br>
      * El controllador tiene que estar anotado con {@code @}{@link FxmlController} y tener un campo anotado con
      * {@code @}{@link ViewStage} el cual debe tener una referencia al {@link Stage} de la vista. Si alguna de las

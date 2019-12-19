@@ -16,7 +16,7 @@
 package com.ainoha.core.exception;
 
 /**
- * Se lanza para indicar que ocurrió un error procesando algún atributo o método anotado con las anotaciones
+ * Se lanza para indicar que ocurrió un error procesando algún campo o método anotado con las anotaciones
  * de Ainoha que requieren la ejecución de algún tipo de proceso.
  *
  * @author Eduardo Betanzos

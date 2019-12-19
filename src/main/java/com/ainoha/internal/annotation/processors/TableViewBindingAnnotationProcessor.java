@@ -60,7 +60,7 @@ class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
 
     /**
      * Crea, para cada una de las columnas de la lista {@code columns}, un {@code CellValueFactory} para hacer binding
-     * con una propiedad X dentro de un Bean. Para lograr que el binding funcione, el valor del atributo {@link TableColumn#id}
+     * con una propiedad X dentro de un Bean. Para lograr que el binding funcione, el valor del campo {@link TableColumn#id}
      * de cada columna debe coincidir con el nombre de la propiedad con que se desea hacer binding dentro del Bean. <br>
      * <br>
      * En otras palabras, este método permite definir automáticamente el binding de las columnas de una tabla con las

@@ -162,7 +162,7 @@ public final class FxmlViewHelper {
      *                   del parámetro {@code fxmlPath}.
      *
      * @param fully Si es {@code true} se procesarán todos los miembros anotados, en caso contrario solo se procesarán los
-     *              atributos.
+     *              campos.
      *
      * @return Raíz de la vista
      */
