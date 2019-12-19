@@ -52,7 +52,12 @@ import java.util.ResourceBundle;
  * @author Eduardo Betanzos
  */
 public final class FxmlViewHelper {
-    
+
+    /**
+     * Evita la instanciación de la clase
+     */
+    private FxmlViewHelper() {}
+
     /**
      * Muestra una vista de la aplicación.
      *

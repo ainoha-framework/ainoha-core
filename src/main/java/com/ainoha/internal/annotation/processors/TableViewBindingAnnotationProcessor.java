@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  *
  * @author Eduardo Betanzos
  */
-public class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
+class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
     @Override
     public void process(Object target, Object source) {
         try {

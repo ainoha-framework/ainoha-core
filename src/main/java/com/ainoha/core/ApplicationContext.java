@@ -164,8 +164,6 @@ public final class ApplicationContext {
                                          fxApplicationAnnotation.appImagePath(),
                                          args);
 
-        boolean startupError = false;
-        Throwable startupErrorCause = null;
         try {
             ReflectionUtil.invokeStaticMethod(Application.class, "launch", new Class[] {Class.class, String[].class}, appClass, args);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
@@ -174,15 +172,10 @@ public final class ApplicationContext {
             // InvocationTargetException se lanza si ocurre un error en la ejecución del método
             LOGGER.log(Level.FINE, "Error invocando el método 'launch()' en la clase principal de la aplicación", e);
 
-            startupError = true;
-            startupErrorCause = e;
-        } finally {
-            if (startupError) {
-                // Invalidar el contexto
-                context = null;
+            // Invalidar el contexto
+            context = null;
 
-                throw new ApplicationStartupException("No se puedo arrancar la aplicación producto a un error", startupErrorCause);
-            }
+            throw new ApplicationStartupException("No se puedo arrancar la aplicación producto a un error", e);
         }
     }
 

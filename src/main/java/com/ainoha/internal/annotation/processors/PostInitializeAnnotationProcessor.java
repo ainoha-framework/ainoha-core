@@ -32,7 +32,7 @@ import java.lang.reflect.Method;
  *
  * @author Eduardo Betanzos
  */
-public class PostInitializeAnnotationProcessor implements AnnotationProcessor {
+class PostInitializeAnnotationProcessor implements AnnotationProcessor {
     @Override
     public void process(Object target, Object source) {
         try {

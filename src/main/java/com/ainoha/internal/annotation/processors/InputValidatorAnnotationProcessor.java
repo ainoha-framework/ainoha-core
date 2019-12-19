@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
  *
  * @author Eduardo Betanzos
  */
-public class InputValidatorAnnotationProcessor implements AnnotationProcessor {
+class InputValidatorAnnotationProcessor implements AnnotationProcessor {
     @Override
     public void process(Object target, Object source) {
         try {
@@ -73,6 +73,7 @@ public class InputValidatorAnnotationProcessor implements AnnotationProcessor {
 
             if (!maxLengthValidation(maxLength, textField, textToInsert)
                     || !patternValidation(validationPattern, textField, textToInsert)) {
+
                 event.consume();
             }
         });

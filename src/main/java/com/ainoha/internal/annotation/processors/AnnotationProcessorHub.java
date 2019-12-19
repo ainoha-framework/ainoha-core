@@ -25,8 +25,10 @@ import java.util.Set;
 /**
  * @author Eduardo Betanzos
  */
-public class AnnotationProcessorHub {
+public final class AnnotationProcessorHub {
     private final static Map<Class, AnnotationProcessor> processors;
+
+    private AnnotationProcessorHub() {};
 
     static {
         processors = Map.of(
