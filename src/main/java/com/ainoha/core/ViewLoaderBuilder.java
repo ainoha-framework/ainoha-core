@@ -38,6 +38,7 @@ public final class ViewLoaderBuilder {
     private Modality modality;
     private StageStyle stageStyle;
     private boolean resizable = true;
+    private boolean maximized = false;
     private boolean fullScreen;
     private String fullScreenExitHint;
     private KeyCombination fullScreenExitKeyCombination;
@@ -132,6 +133,18 @@ public final class ViewLoaderBuilder {
     }
 
     /**
+     * Define que el {@link Stage} donde se mostrará la vista se debe mostrar maximizado.<br>
+     * <br>
+     * Valor por defecto: Si no se indica lo contrario el {@link Stage} no se mostrará maximizado
+     *
+     * @return {@code this}
+     */
+    public ViewLoaderBuilder maximized() {
+        this.maximized = true;
+        return this;
+    }
+
+    /**
      * Especifica el texto que se muestra cuando el {@link Stage} se muestra en modo de pantalla completa, generalmente
      * se usa para indicar la forma en que un usuario debe salir del modo de pantalla completa. El valor {code null}
      * dará como resultado que se muestre el mensaje predeterminado sergún el {@link java.util.Locale} de la aplicación.
@@ -178,6 +191,7 @@ public final class ViewLoaderBuilder {
                 modality,
                 stageStyle,
                 resizable,
+                maximized,
                 fullScreen,
                 fullScreenExitHint,
                 fullScreenExitKeyCombination

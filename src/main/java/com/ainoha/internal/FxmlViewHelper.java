@@ -82,8 +82,8 @@ public final class FxmlViewHelper {
      * @throws ShowingViewException Si ocurre algún error durante el proceso. La causa contendrá más detalles del error.
      */
     public static void showFxmlView(Class controllerClass, Stage viewStage, Stage owner, Object params, Modality modality,
-                                    StageStyle stageStyle, boolean resizable, boolean fullScreen, String fullScreenExitHint,
-                                    KeyCombination fullScreenExitKeyCombination) {
+                                    StageStyle stageStyle, boolean resizable, boolean maximized, boolean fullScreen,
+                                    String fullScreenExitHint, KeyCombination fullScreenExitKeyCombination) {
 
         String viewFilePath = null;
 
@@ -125,6 +125,9 @@ public final class FxmlViewHelper {
 
             // Definir si es redimensionable
             stage.setResizable(resizable);
+
+            // Mostrar la ventana maximizada
+            stage.setMaximized(maximized);
 
             // Activar modo pantalla-completa
             if (fullScreen) {
