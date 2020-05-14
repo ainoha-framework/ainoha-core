@@ -16,16 +16,21 @@
 package com.ainoha.internal.annotation.processors;
 
 import com.ainoha.core.annotation.FxmlController;
+import com.ainoha.core.exception.AnnotationProcessorException;
 
 /**
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public interface AnnotationProcessor {
     /**
-     * Ejecuta el proceso asociado a la anotación.
+     * Executes the process associated with the annotation
      *
-     * @param target Elemento anotado (generalmente una instancia de: {@link java.lang.reflect.Field} o {@link java.lang.reflect.Method})
-     * @param source Objeto que contiene al {@code target} (instancia de una clase anotada con {@link FxmlController})
+     * @param target Annotated element (usually an instance of either {@link java.lang.reflect.Field}
+     *               or {@link java.lang.reflect.Method})
+     * @param source Object containing the {@code target} (an instance of a class annotated with {@link FxmlController})
+     *
+     * @throws AnnotationProcessorException If an error occurs during method execution
      */
     void process(Object target, Object source);
 }

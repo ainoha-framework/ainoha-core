@@ -31,68 +31,66 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Contexto de la aplicación.
+ * This class handle the global context of the application.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public final class ApplicationContext {
 
     private static final Logger LOGGER = Logger.getLogger(ApplicationContext.class.getName());
 
-    /**
-     * Referencia al contexto de la aplicación
-     */
     private static ApplicationContext context;
 
     /**
-     * Paquete que contiene los recursos de idioma + el nombre común de los archivos {@code .properties}
-     * (ej. paquete.de.recursos.languaje, donde 'languaje' es el nombre de los archivos de idioma como: languaje_es.properties,
-     * languaje_en.properties)
+     * Package of language resources + common filename of {@code .properties} (i.e. resources.lang.language,
+     * being 'language' the common filename: language_en.properties, language_es.properties)
      */
     private final String LANG_RESOURCES;
     /**
-     * Recursos de idioma para el idioma definido en {@link Locale#getDefault()}
+     * Language resources for the language (defined by {@link Locale#getDefault()})
      */
     private ResourceBundle resourceBundle;
 
     /**
-     * {@link Locale} actual de la aplicación. Se actualiza con la llamada al método {@link ApplicationContext#getResourceBundle()}
+     * Current application {@link Locale}. Could be updated when the method {@link ApplicationContext#getResourceBundle()}
+     * is called.
      */
     private Locale currentResourcesLocale;
 
     /**
-     * Idioma por defecto (ej. 'es' para español, 'en' para inglés, etc)
+     * Default language (i.e. 'en' for english, 'es' for spanish, etc.)
      */
     private final String DEFAULT_LOCALE_LANG;
     /**
-     * Recursos de idioma para el idioma por defecto (definido por {@link ApplicationContext#DEFAULT_LOCALE_LANG})
+     * Language resources for the default language (defined by {@link ApplicationContext#DEFAULT_LOCALE_LANG})
      */
     private ResourceBundle defaultResourceBundle;
 
     /**
-     * Ruta, relativa al CLASS_PATH, del icono de la aplicación (ej. /com/my/app/icon.png)
+     * Application image path relative to the CLASSPATH (ej. /com/my/app/icon.png)
      */
     private final String appImageResourcePath;
     /**
-     * Imagen de la aplicación
+     * Application image
      */
     private Image appImage;
     /**
-     * Parámetros de línea de comandos pasados a la aplicación JavaFX
+     * Applications command-line arguments
      */
     private final String[] appParams;
 
     /**
-     * Crea una instancia de la clase.
+     * Create an instance.
      *
-     * @param appClass Clase principal de la aplicación anotada con {@code @}{@link FxApplication}. Esta clase tiene que
-     *      *          heradar de la clase {@link Application}
-     * @param langResources Paquete que contiene los recursos de idioma + el nombre común de los archivos {@code .properties}
-     *                      (ej. paquete.de.recursos.languaje, donde 'languaje' es el nombre de los archivos de idioma
-     *                      como: languaje_es.properties, languaje_en.properties)
-     * @param defaultLang Idioma por defecto (ej. 'es' para español, 'en' para inglés, etc)
-     * @param appImageResourcePath Ruta, relativa al CLASS_PATH, del icono de la aplicación (ej. /com/my/app/icon.png)
-     * @param appParams Parámetros de línea de comandos pasados a la aplicación JavaFX
+     * @param appClass             Application main class which should be annotated with {@code @}{@link FxApplication}
+     *                             and inherit from {@code @}{@link FxApplication}
+     * @param langResources        Package for language resources + common filename of {@code .properties} (i.e.
+     *                             resources.lang.language, being 'language' the common filename: language_en.properties,
+     *                             language_es.properties)
+     * @param defaultLang          Default language (i.e. 'en' for english, 'es' for spanish, etc.)
+     * @param appImageResourcePath Application image path relative to the CLASSPATH (ej. /com/my/app/icon.png)
+     * @param appParams            Applications command-line arguments
      */
     private ApplicationContext(final Class appClass, final String langResources, final String defaultLang, final String appImageResourcePath, String... appParams) {
         LANG_RESOURCES = langResources;
@@ -104,7 +102,7 @@ public final class ApplicationContext {
             try {
                 resourceBundle = ResourceBundle.getBundle(LANG_RESOURCES, currentResourcesLocale);
             } catch (MissingResourceException e) {
-                LOGGER.severe("Error cargando el recurso de idioma para el locale actual: " + LANG_RESOURCES + "_"
+                LOGGER.severe("Error loading the language resource for the current locale: " + LANG_RESOURCES + "_"
                         + currentResourcesLocale.getLanguage());
             }
 
@@ -112,7 +110,7 @@ public final class ApplicationContext {
                 try {
                     defaultResourceBundle = ResourceBundle.getBundle(LANG_RESOURCES, new Locale(DEFAULT_LOCALE_LANG));
                 } catch (MissingResourceException e) {
-                    LOGGER.severe("Error cargando el recurso de idioma por defecto: " + LANG_RESOURCES + "_"
+                    LOGGER.severe("Error loading default language resource: " + LANG_RESOURCES + "_"
                             + DEFAULT_LOCALE_LANG);
                 }
             }
@@ -128,33 +126,34 @@ public final class ApplicationContext {
     }
 
     /**
-     * Arranca la aplicación de JavaFX e inicializa su contexto. Típicamente este método se llama desde el método
-     * {@code main(String[])}. No debe ser llamado más de una vez (excepto si la llamada anterior lanzó una excepción)
-     * ya que una excepción del tipo {@link IllegalStateException} será lanzada.
+     * Launch the JavaFX application and initialize its context. Typically this method will be called from
+     * {@code main(String[])} method. Should not be called more than once (except if the previous call threw
+     * an exception) because an {@link IllegalStateException} will be throw.
      *
-     * @param appClass Clase principal de la aplicación anotada con {@code @}{@link FxApplication}. Esta clase tiene que
-     *                 heradar de la clase {@link Application}
-     * @param args Parámetros por línea de comandos pasados a la aplicación
+     * @param appClass Application main class which should be annotated with {@code @}{@link FxApplication}
+     *                 and inherit from {@code @}{@link FxApplication}
+     * @param args     Applications command-line arguments
      *
-     * @throws IllegalStateException Si el método es llamado más de una vez con éxito
-     * @throws IllegalArgumentException Si el parámetro {@code appClass} es {@code null} o si la clase que representa
-     *                                  dicho parámetro no está anotada con {@code @}{@link FxApplication}
-     * @throws ApplicationStartupException Si ocurrió un error durante la invocación al método {@link Application#launch(String...)}
+     * @throws IllegalStateException       If this method is called more than once successfully
+     * @throws IllegalArgumentException    If {@code appClass} is {@code null} or the class is not annotated
+     *                                     with {@code @}{@link FxApplication}
+     * @throws ApplicationStartupException If an exception is thew when the {@link Application#launch(String...)}
+     *                                     method is invoked
      */
     public static void startApplication(Class<? extends Application> appClass, String... args) {
         if (context != null) {
-            throw new IllegalStateException("El método ApplicationContext.startApplication() no puede ser llamado más de una vez");
+            throw new IllegalStateException("ApplicationContext.startApplication() cannot be called more than once");
         }
 
         if (appClass == null) {
-            throw new IllegalArgumentException("No se pudo iniciar la aplicación. 'appClass' no puede ser null");
+            throw new IllegalArgumentException("'appClass' cannot be null");
         }
 
         FxApplication fxApplicationAnnotation = appClass.getDeclaredAnnotation(FxApplication.class);
 
         if (fxApplicationAnnotation == null) {
-            throw new IllegalArgumentException("No se pudo iniciar la aplicación. La clase " + appClass.getName()
-                    + " debe estar anotada con @" + FxApplication.class.getName());
+            throw new IllegalArgumentException("Application could not be started. Class " + appClass.getName()
+                    + " must be annotated with @" + FxApplication.class.getName());
         }
 
         // Crear el contexto de la aplicación
@@ -165,43 +164,51 @@ public final class ApplicationContext {
                                          args);
 
         try {
-            ReflectionUtil.invokeStaticMethod(Application.class, "launch", new Class[] {Class.class, String[].class}, appClass, args);
+            ReflectionUtil.invokeStaticMethod(
+                    Application.class,
+                    "launch",
+                    new Class[] {Class.class, String[].class},
+                    appClass,
+                    args
+            );
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            // NoSuchMethodException no puede ocurrir porque appClass representa una clase que hereda de javafx.application.Application
-            // IllegalAccessException no puede ocurrir, porque el método 'launch' de la clase javafx.application.Application es 'public static'
-            // InvocationTargetException se lanza si ocurre un error en la ejecución del método
-            LOGGER.log(Level.FINE, "Error invocando el método 'launch()' en la clase principal de la aplicación", e);
+            // NoSuchMethodException cannot occur because appClass represents a class that inherits
+            //                       from javafx.application.Application
+            // IllegalAccessException cannot occur because javafx.application.Application#launch()
+            //                        method is 'public static'
+            // InvocationTargetException thrown if an error occurs in method execution
+            LOGGER.log(Level.FINE, "Error invoking 'launch()' method from tha application main class", e);
 
             // Invalidar el contexto
             context = null;
 
-            throw new ApplicationStartupException("No se puedo arrancar la aplicación producto a un error", e);
+            throw new ApplicationStartupException("Application could not start due to an error", e);
         }
     }
 
     /**
-     * Permite obtener una referencia al contexto de la aplicación. Si este método se llamada antes de arrancar la aplicación
-     * (esto es, no se ha realizado una llamada exitosa al método {@link ApplicationContext#startApplication}) se lanzará
-     * una excepción del tipo {@link ApplicationContextNotFoundException}
+     * Allows to get a reference to the application context. If this method is called before launch the application
+     * (this is, a successful call to method {@link ApplicationContext#startApplication} was not made) an
+     * {@link ApplicationContextNotFoundException} will be throw.
      *
-     * @return Referencia al contexto de la aplicación
+     * @return A reference to the application context
      *
-     * @throws ApplicationContextNotFoundException Si no existe el contexto de la aplicación
+     * @throws ApplicationContextNotFoundException If the application context does not exist
      */
     public static ApplicationContext instance() {
         if (context == null) {
-            throw new ApplicationContextNotFoundException("No existe el contexto de la aplicación");
+            throw new ApplicationContextNotFoundException("Application context not exist");
         }
 
         return context;
     }
 
     /**
-     * Permite obtener los recursos de idioma de la aplicación para el idioma definido en {@link ApplicationContext#currentResourcesLocale}.
-     * Si los recursos de idioma actuales, no se corresponden con el idioma actual de {@link Locale#getDefault()}, estos
-     * serán actualizados.
+     * Allows to get the language resources for the current language (defined by {@link ApplicationContext#currentResourcesLocale}).
+     * If current cached language resources do not match the current language (defined by {@link Locale#getDefault()}) these will
+     * be updated.
      *
-     * @return Recursos de idioma o {@code null} si no se configuraron
+     * @return Language resources or {@code null} if there are not defined
      */
     public ResourceBundle getResourceBundle() {
         if (this.LANG_RESOURCES == null || this.LANG_RESOURCES.isBlank()) {
@@ -217,27 +224,27 @@ public final class ApplicationContext {
     }
 
     /**
-     * Permite obtener los recursos de idioma para el idioma por defecto de la aplicación.
+     * Allows to get the language resources for the default application language.
      *
-     * @return Recursos de idioma por defecto o {@code null} si no se configuró
+     * @return Default language resources or {@code null} if there are not defined
      */
     public ResourceBundle getDefaultResourceBundle() {
         return defaultResourceBundle;
     }
 
     /**
-     * Permite obtener la imágen de la aplicación.
+     * Allows to get the application image.
      *
-     * @return Imagen de la aplicación o {@code null} si no se configuró
+     * @return Application image or {@code null} if there are not defined
      */
     public Image getAppImage() {
         return appImage;
     }
 
     /**
-     * Permite  obtener los parátros de línea de comandos pasados a la aplicación JavaFX.
+     * Allows to get the applications command-line parameters
      *
-     * @return Parámetros de línea de comandos
+     * @return Command-line parameters
      */
     public String[] getAppParams() {
         return appParams;

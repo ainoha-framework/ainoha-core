@@ -16,11 +16,12 @@
 package com.ainoha.core.exception;
 
 /**
- * Se lanza para indicar que ocurrió un error al intentar arrancar la aplicación JavaFX a través del
- * {@link com.ainoha.core.ApplicationContext}. La principal causa es que la llamada al método
- * {@link javafx.application.Application#launch(String...)} haya lanzado una excepción.
+ * It is thrown to indicate that an error occurred while trying to start the JavaFX application. The main
+ * cause is that the {@link javafx.application.Application#launch(String...)} method call has thrown an
+ * exception.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public class ApplicationStartupException extends RuntimeException {
 

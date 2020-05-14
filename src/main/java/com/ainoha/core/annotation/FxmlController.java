@@ -21,43 +21,45 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Marca una clase como controlador de una vista FXML. Las clases anotadas con esta anotación son las que se podrán
- * utiliar para mostrar vistas de la aplicación. Esto invierte el modo propuesto por JavaFX para  mostrar vistas del tipo
- * FXML, ya que en vez de definir en el archivo {@code .fxml} de la vista el controlador asociado ahora en el controlador
- * definidmos la vista que este maneja. Esto desacopla el proceso de diseño de la programación, ya que no es necesario
- * ligar un archivo {@code .fxml} a una clase de la aplicación.
+ * Defines a FXML view controller.<br>
+ * <br>
+ * Classes annotated with this annotation will be those that can be used to display application views. This invert
+ * the JavaFX's way to display the views from {@code .fxml} files, since each controller defines it FXML view
+ * associated instead of define which controller handle the view in the {@code .fxml} file. This approach allow
+ * to decouple the design and programming processes, since it is not necessary to bind a {@code .fxml} file to an
+ * application class.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FxmlController {
 
     /**
-     * Ruta, relativa al CLASS_PATH, del archivo FXML de la vista (ej. /com/my/app/view.fxml). Si la ruta no se incluye
-     * la extensión {@code .fxml} el framework la incuirá.
+     * Path, in the CLASSPATH, to the view FXML file (i.e. /com/my/app/view.fxml). File extension
+     * ({@code .fxml}) is optional.
      */
     String fxmlPath();
 
     /**
-     * Ruta, relativa al CLASS_PATH, del icono de la ventana (ej. /com/my/app/icon.png)<br>
+     * Path, in the CLASSPATH, to the view icon (ej. /com/my/app/icon.png)<br>
      * <br>
-     * Valor por defecto: "app.png" (No se tendrá en cuenta)
+     * Default: "/app.png"
      */
     String iconPath() default "/app.png";
 
     /**
-     * Clave del título de la ventana dentro de los recursos de idioma<br>
+     * Window title key within language resources<br>
      * <br>
-     * Valor por defecto: "" (No se tendrá en cuenta)
+     * Default: "" (Will be ignored)
      */
     String titleKey() default "";
 
     /**
-     * Título de la ventana. Si se le define un valor provocará que no tenga en cuenta la propiedad
-     * {@link FxmlController#titleKey()}<br>
+     * Window title. This override the value taken from {@link FxmlController#titleKey()}<br>
      * <br>
-     * Valor por defecto: "" (No se tendrá en cuenta)
+     * Default: "" (Will be ignored)
      */
     String title() default "";
 }

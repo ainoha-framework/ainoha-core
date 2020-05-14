@@ -24,10 +24,11 @@ import javafx.stage.StageStyle;
 import java.util.Objects;
 
 /**
- * Esta clase permite simplificar el proceso de visualización de vistas FXML; ya que este requiere que se especifiquen
- * una serie de parámetros que definen el modo en que se debe mostrar la vista.
- * 
+ * This builder simplify the process for showing applications views, since this process may require combining many
+ * parameters.
+ *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public final class ViewLoaderBuilder {
 
@@ -44,14 +45,14 @@ public final class ViewLoaderBuilder {
     private KeyCombination fullScreenExitKeyCombination;
 
     public ViewLoaderBuilder(Class controllerClass) {
-        Objects.requireNonNull(controllerClass, "La clase de controlador no puede ser 'null'");
+        Objects.requireNonNull(controllerClass, "'controllerClass' cannot be null");
         this.controllerClass = controllerClass;
     }
 
     /**
-     * Define el {@link Stage} donde se mostrará la vista. Si este es {@code null} se creará uno.<br>
+     * Defines the view {@link Stage}. If this {@link Stage} is {@code null} one will be created.<br>
      * <br>
-     * Valor por defecto: {@code null}
+     * Default: {@code null}
      *
      * @param viewStage {@link Stage}
      *
@@ -63,11 +64,11 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Define el {@link Stage} propietario de la vista. Si este es {@code null} la vista no tendrá propietario.<br>
+     * Defines the view owner {@link Stage}. If this owner {@link Stage} is {@code null} the view will not have owner.<br>
      * <br>
-     * Valor por defecto: {@code null}
+     * Default: {@code null}
      *
-     * @param owner {@link Stage} propietario
+     * @param owner {@link Stage} owner
      *
      * @return {@code this}
      */
@@ -77,11 +78,11 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Permite pasar datos al controlador de la vista que se mostrará.<br>
+     * Allows to pass data to the view.<br>
      * <br>
-     * Valor por defecto: {@code null}
+     * Default: {@code null}
      *
-     * @param userData Datos a pasar
+     * @param userData Data to pass
      *
      * @return {@code this}
      */
@@ -91,10 +92,9 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Define la modalidad ({@link Modality}) del {@link Stage} donde se mostrará la vista. Si es {@code null} no tendrá
-     * efecto.<br>
+     * Defines the {@link Stage} {@link Modality}. If {@code null} will be ignored.<br>
      * <br>
-     * Valor por defecto: {@code null}
+     * Default: {@code null}
      *
      * @param modality {@link Modality}
      *
@@ -106,10 +106,9 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Define el estilo ({@link StageStyle}) del {@link Stage} donde se mostrará la vista. Si es {@code null} no tendrá
-     * efecto.<br>
+     * Defines the {@link StageStyle}. If {@code null} will be ignored.<br>
      * <br>
-     * Valor por defecto: {@code null}
+     * Default: {@code null}
      *
      * @param stageStyle {@link StageStyle}
      *
@@ -121,9 +120,9 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Define que el {@link Stage} donde se mostrará la vista no será redimensionable.<br>
+     * Defines that the {@link Stage} where the view will be displayed will not allow resizing.<br>
      * <br>
-     * Valor por defecto: Si no se indica lo contrario el {@link Stage} siempre será redimensionable
+     * Default: {@link Stage} allow resizing
      *
      * @return {@code this}
      */
@@ -133,9 +132,9 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Define que el {@link Stage} donde se mostrará la vista se debe mostrar maximizado.<br>
+     * Defines that the {@link Stage} where the view will be displayed should be maximized.<br>
      * <br>
-     * Valor por defecto: Si no se indica lo contrario el {@link Stage} no se mostrará maximizado
+     * Default: {@link Stage} will not be maximized
      *
      * @return {@code this}
      */
@@ -145,12 +144,12 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Especifica el texto que se muestra cuando el {@link Stage} se muestra en modo de pantalla completa, generalmente
-     * se usa para indicar la forma en que un usuario debe salir del modo de pantalla completa. El valor {code null}
-     * dará como resultado que se muestre el mensaje predeterminado sergún el {@link java.util.Locale} de la aplicación.
-     * Si se pasa una cadena vacía, no se mostrará ningún mensaje.<br>
+     * Defines the exit hint text for fullscreen mode.<br>
      * <br>
-     * Valor por defecto: {@code null}
+     * If an empty {@link String} is defined the exit hint text will be empty too. If {@code null} the default value
+     * (defined by JavaFX) will be used, according the current {@link java.util.Locale}.<br>
+     * <br>
+     * Default: {@code null}
      *
      * @param fullScreenExitHint {@link String}
      *
@@ -162,14 +161,14 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Especifica la combinación de teclas que permitirá al usuario salir del modo de pantalla completa. Un valor de
-     * {@link KeyCombination#NO_MATCH} no coincidirá con ningún {@link javafx.scene.input.KeyEvent} y lo hará para que
-     * el usuario no pueda salir del modo de pantalla completa. El valor {@code null} indica que se debe utilizar la
-     * combinación de teclas por defecto específica de la plataforma.<br>
+     * Defines the exit {@link KeyCombination} for fullscreen mode.<br>
      * <br>
-     * Valor por defecto: {@code null}
+     * The value {@link KeyCombination#NO_MATCH} will prevent the fullscreen mode from being exited. If {@code null}
+     * the default value (defined by JavaFX) will be used.<br>
+     * <br>
+     * Default: {@code null}
      *
-     * @param fullScreenExitKeyCombination {@link KeyCombination}
+     * @param fullScreenExitKeyCombination {@link KeyCombination} for exit fullscreen mode
      *
      * @return {@code this}
      */
@@ -179,8 +178,8 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Muestra la vista utilizando los parámetros definidos antes de llamar este método. Los parámetros para los cuales
-     * no se haya definido un valor explícitamente utilizarán su valor por defecto.
+     * Shows the view using parameters defined before call this method. If no explicit values are defined for the view
+     * parameters, default values will be used.
      */
     public void show() {
         FxmlViewHelper.showFxmlView(
@@ -199,9 +198,10 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Muestra la vista sin decoración utilizando los parámetros definidos antes de llamar este método y sobrescribiendo
-     * el valor del parámetro {@code stageStyle}. Los parámetros para los cuales no se haya definido un valor explícitamente
-     * utilizarán su valor por defecto, excepto el parámetro {@code stageStyle} cuyo valor será {@link StageStyle#UNDECORATED}.
+     * Shows the view undecorated by defining {@link StageStyle#UNDECORATED} as value for the {@code stageStyle}
+     * parameter.
+     *
+     * @see ViewLoaderBuilder#show()
      */
     public void showUndecorated() {
         stageStyle = StageStyle.UNDECORATED;
@@ -209,8 +209,9 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Muestra la vista en modo pantalla completa utilizando los parámetros definidos antes de llamar este método. Los
-     * parámetros para los cuales no se haya definido un valor explícitamente utilizarán su valor por defecto.
+     * Shows the view in fullscreen mode.
+     *
+     * @see ViewLoaderBuilder#show()
      */
     public void showFullScreen() {
         fullScreen = true;
@@ -218,7 +219,7 @@ public final class ViewLoaderBuilder {
     }
 
     /**
-     * Regresa al builder a su estado inicial definiendo el valor por defecto de todos los parámetros.
+     * Reset the builder internal state by setting up the default values for all parameters.
      */
     public void reset() {
         viewStage = null;

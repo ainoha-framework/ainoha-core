@@ -16,10 +16,11 @@
 package com.ainoha.core.exception;
 
 /**
- * Se lanza para indicar que ocurrió un error procesando algún campo o método anotado con las anotaciones
- * de Ainoha que requieren la ejecución de algún tipo de proceso.
+ * It is thrown to indicate that an error occurred processing some field or method annotated with the
+ * Ainoha annotations that require the execution of some type of process.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public class AnnotationProcessorException extends RuntimeException {
     public AnnotationProcessorException(Throwable cause) {

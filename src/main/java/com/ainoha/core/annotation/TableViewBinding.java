@@ -21,15 +21,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Permite agregar a cada una de las columnas del {@link javafx.scene.control.TableView} anotado un {@code CellValueFactory}
- * para hacer un binding con una propiedad dentro de una clase usada como modelo. Para lograr que el binding funcione,
- * el valor del campo {@link javafx.scene.control.TableColumn#id} de cada columna debe coincidir con el nombre de la
- * propiedad con la que se desea hacer el binding dentro del modelo.<br>
+ * Allows to add a {@code CellValueFactory} to each column of the annotated {@link javafx.scene.control.TableView} in
+ * order to bind its with the model class properties. This binding work only if the value of
+ * {@link javafx.scene.control.TableColumn#id} match with the name of the property which you want to display in the
+ * column.<br>
  * <br>
- * En otras palabras, esta anotación permite definir automáticamente el binding de las columnas de una tabla con las
- * propiedades correspondientes dentro de los objetos con que esta se llena.
+ * In other words, this annotation allows you to automatically define the binding of the columns of a table with the
+ * corresponding properties within the objects with which it is filled.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

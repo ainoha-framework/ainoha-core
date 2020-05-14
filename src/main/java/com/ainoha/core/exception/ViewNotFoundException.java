@@ -16,9 +16,10 @@
 package com.ainoha.core.exception;
 
 /**
- * Se lanza para indicar que no se encontró una vista de la aplicación.
- * 
+ * It is thrown to indicate that an application view was not found.
+ *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public class ViewNotFoundException extends RuntimeException {
 

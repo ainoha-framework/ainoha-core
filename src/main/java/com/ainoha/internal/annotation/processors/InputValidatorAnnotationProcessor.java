@@ -26,18 +26,17 @@ import java.lang.reflect.Field;
 import java.util.regex.Pattern;
 
 /**
- * Procesador para la anotación {@code @}{@link InputValidator}.<br>
+ * Processor for {@code @}{@link InputValidator} annotation.<br>
  * <br>
- * El método {@link InputValidatorAnnotationProcessor#process(Object, Object)} tiene que recibir como primer parámetro una
- * referencia al campo anotado (instancia de {@link java.lang.reflect.Field}) y como segundo parámetro la instancia del
- * controlador que contiene este campo.<br>
- * <br>
- * Si ocurre algún error durante la ejecución del método {@link InputValidatorAnnotationProcessor#process(Object, Object)}
- * se lanzará una excepción de tipo {@link AnnotationProcessorException}.
+ * Method {@link InputValidatorAnnotationProcessor#process(Object, Object)} has to receive as first parameter a
+ * reference to the annotated field (an instance of {@link Field}) and as second the controller instance containing
+ * this field.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 class InputValidatorAnnotationProcessor implements AnnotationProcessor {
+
     @Override
     public void process(Object target, Object source) {
         try {
@@ -55,7 +54,7 @@ class InputValidatorAnnotationProcessor implements AnnotationProcessor {
 
     private void addValidator(final TextInputControl textField, final String validationPattern, final int maxLength) {
         textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.V) {// Esto es para capturar el Ctrl + V
+            if (event.getCode() == KeyCode.V) {// for catch Ctrl + V
                 String textToPaste = Clipboard.getSystemClipboard().getString();
 
                 if (textToPaste == null

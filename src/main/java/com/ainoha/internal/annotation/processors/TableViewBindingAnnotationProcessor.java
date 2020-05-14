@@ -25,16 +25,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.lang.reflect.Field;
 
 /**
- * Procesador para la anotación {@code @}{@link TableViewBinding}.<br>
+ * Processor for {@code @}{@link TableViewBinding} annotation.<br>
  * <br>
- * El método {@link TableViewBindingAnnotationProcessor#process(Object, Object)} tiene que recibir como primer parámetro
- * una referencia al campo anotado (instancia de {@link Field}), el que tiene que ser de tipo {@link javafx.scene.control.TableView}
- * y como segundo parámetro la instancia del controlador que contiene este campo.<br>
- * <br>
- * Si ocurre algún error durante la ejecución del método {@link TableViewBindingAnnotationProcessor#process(Object, Object)}
- * se lanzará una excepción de tipo {@link AnnotationProcessorException}.
+ * Method {@link TableViewBindingAnnotationProcessor#process(Object, Object)} has to receive as first parameter a
+ * reference to the annotated field (an instance of {@link Field}) and as second the controller instance containing
+ * this field. The annotated field must by an instance of {@link javafx.scene.control.TableView}
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
     @Override
@@ -43,9 +41,11 @@ class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
             Field field = (Field) target;
 
             if (!field.getType().equals(TableView.class)) {
-                throw new AnnotationProcessorException("La anotación @" + TableViewBinding.class.getName()
-                        + " solo puede aplicarse a campos de tipo " + TableView.class.getName() + ". Tipo de dato encontrado: "
-                        + field.getType().getName());
+                throw new AnnotationProcessorException(
+                        "Annotation @" + TableViewBinding.class.getName()
+                                + " can be used only in fields of type " + TableView.class.getName()
+                                + ". Found field type: " + field.getType().getName()
+                );
             }
 
             field.setAccessible(true);
@@ -59,14 +59,9 @@ class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
     }
 
     /**
-     * Crea, para cada una de las columnas de la lista {@code columns}, un {@code CellValueFactory} para hacer binding
-     * con una propiedad X dentro de un Bean. Para lograr que el binding funcione, el valor del campo {@link TableColumn#id}
-     * de cada columna debe coincidir con el nombre de la propiedad con que se desea hacer binding dentro del Bean. <br>
-     * <br>
-     * En otras palabras, este método permite definir automáticamente el binding de las columnas de una tabla con las
-     * propiedades correspondientes dentro de los objetos con que se llena esta.
+     * @param columns List of table columns (see {@link TableColumn})
      *
-     * @param columns Listado de columnas de una tabla (ver {@link TableColumn})
+     * @see TableViewBinding
      */
     public static void addTableColumsDataBinding(ObservableList columns) {
         columns.stream().forEach(column -> {

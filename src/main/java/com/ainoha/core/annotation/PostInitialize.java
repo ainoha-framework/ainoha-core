@@ -21,12 +21,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Permite marcar un método de un controlador de vista para que este sea ejecutado:<br>
- *     - luego de la inicialización del controlador por parte de JavaFX,<br>
- *     - luego de haberse inyectado todas las dependencias manejadas por Ainoha Framework, y<br>
- *     - antes de mostrar la vista.
+ * The annotated method will be executed:<br>
+ *   - after controller initialization by JavaFX,<br>
+ *   - after Ainoha Framework inject the controller dependencies, and<br>
+ *   - before show the view.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

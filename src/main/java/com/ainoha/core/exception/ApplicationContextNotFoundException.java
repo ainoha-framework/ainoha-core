@@ -16,10 +16,11 @@
 package com.ainoha.core.exception;
 
 /**
- * Se lanza para indicar que no existe el contexto de la aplicación. Esto puede deberse principalmente a que no se ha
- * iniciado la aplicación a través de una llamada al método {@link com.ainoha.core.ApplicationContext#startApplication}.
+ * It is thrown to indicate that the application context is missing. This may be mainly because the application
+ * was not started through a call to the method {@link com.ainoha.core.ApplicationContext#startApplication}.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public class ApplicationContextNotFoundException extends RuntimeException {
 

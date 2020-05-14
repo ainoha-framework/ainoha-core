@@ -23,36 +23,38 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Anotación principal del framework que debe ser utilizada en la clase principal de la aplicación de JavaFX la cual a
- * su vez debe heradar de {@link javafx.application.Application}. La clase que haya sido anotada con esta anotación es la
- * que se debe utilizar para arrancar la aplicación por medio de {@link ApplicationContext#startApplication(Class, String...)}.
+ * This is the Ainoha Framework most important annotation which must be used in the main JavaFX application class (
+ * which inherits from {@link javafx.application.Application}).<br>
+ * <br>
+ * The annotated class must be used to start the application through
+ * {@link ApplicationContext#startApplication(Class, String...)}.
  *
  * @author Eduardo Betanzos
+ * @version 1.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FxApplication {
 
     /**
-     * Paquete que contiene los recursos de idioma + el nombre común de los archivos {@code .properties}
-     * (ej. paquete.de.recursos.language, donde 'language' es el nombre de los archivos de idioma como: language_es.properties,
-     * language_en.properties). <br>
+     * Package of language resources + common filename of {@code .properties} (i.e. resources.lang.language,
+     * being 'language' the common filename: language_en.properties, language_es.properties)<br>
      * <br>
-     * Valor por defecto: language (se refiere a los archivos language_xx.properties que se encuentren en el paquete por defecto)
+     * Default: language (refers to the language_xx.properties files in the default package)
      */
     String langResourcesPackage() default "language";
 
     /**
-     * Idioma por defecto (ej. 'es' para español, 'en' para inglés, etc)<br>
+     * Default language (i.e. 'en' for english, 'es' for spanish, etc.)<br>
      * <br>
-     * Valor por defecto: es (Idioma español)
+     * Default: en
      */
-    String defaultLang() default "es";
+    String defaultLang() default "en";
 
     /**
-     * Ruta, relativa al CLASS_PATH, del icono de la aplicación (ej. /com/my/app/icon.png)<br>
+     * Application image path relative to the CLASSPATH (ej. /com/my/app/icon.png)<br>
      * <br>
-     * Valor por defecto: /app.png (Archivo PNG depositado en la raíz del CLASS_PATH)
+     * Default: /app.png
      */
     String appImagePath() default "/app.png";
 }

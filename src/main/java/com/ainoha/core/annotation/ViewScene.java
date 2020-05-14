@@ -21,10 +21,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Permite marcar un campo de tipo {@link javafx.scene.Scene} dentro de un controlador para inyectarle la referencia al
- * ({@link javafx.scene.Scene}) donde se cargó la vista asociada.
+ * Allow to inject, into the annotated field, a reference to the view {@link javafx.scene.Scene}.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

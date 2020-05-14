@@ -23,27 +23,28 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Permite agregar las validaciones definidas por {@link #pattern()} y {@link #maxLength()} a un {@link TextInputControl}
- * (solo debe utilizarse con controles de este tipo).<br>
+ * Allows to add validations to the annotated {@link TextInputControl} (should be used only with subtypes of
+ * this class).<br>
  * <br>
- * Estas validaciones permiten evitar la entrada de texto inválido al control. Por tal motivo la validación se lleva a
- * cabo para cada intento de entrada de dato. Si el texto del control una vez hecha la entrada es inválido, dicha
- * entrada será rechazada.
+ * This validations avoid entering invalid text. Because of this, validation is carried out for each data entry
+ * attempt. If the text control once the entry is made is invalid, the entry will be rejected.<br>
+ * <br>
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface InputValidator {
     /**
-     * Expresión regular que será utilizada para validar el contenido del campo de texto.
+     * Regex defining the text pattern
      */
     String pattern() default ".*";
 
     /**
-     * Cantidad máxima de caracteres que se podrán introducir en el campo de texto.<br>
+     * Max capacity of the text field.<br>
      * <br>
-     * Un valor menor o igual que 0 indica que no se realice la validación.
+     * Values less than or equals to 0 will disable the validation
      */
     int maxLength() default 0;
 }

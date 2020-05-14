@@ -16,11 +16,11 @@
 package com.ainoha.core.exception;
 
 /**
- * Se lanza para indicar que ocurrió un error relacionado con las dependencias de un controlador de archivos FXML.
- * Generalmente está relaciona con errores al intentar inyectar las dependencias en el controllador o al intentar
- * obtener referencias a una de estas dependencias.
+ * It is usually related to errors when trying to inject dependencies into a view controller or
+ * when trying to get references to one of these dependencies.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public class FxmlControllerDependenciesException extends RuntimeException {
 

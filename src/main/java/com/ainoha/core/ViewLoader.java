@@ -16,10 +16,11 @@
 package com.ainoha.core;
 
 /**
- * Agrega a la clase anotada una forma sencilla de obtener un builder que simplifica el proceso de mostrar
- * vistas, ya que este puede requerir diferentes combinaciones de parámetros.
+ * Adds to the class a straightforward way to get a builder which simplify the process for showing applications views,
+ * since this process may require combining many parameters.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public interface ViewLoader {
 

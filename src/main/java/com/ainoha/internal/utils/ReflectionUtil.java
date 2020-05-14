@@ -24,6 +24,7 @@ import java.util.Optional;
 
 /**
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public final class ReflectionUtil {
 
@@ -49,15 +50,15 @@ public final class ReflectionUtil {
         for (Field field : fields) {
             if (isAnnotatedWith(field, annotationClass)) {
                 if (!field.getType().isAssignableFrom(value.getClass())) {
-                    throw new FxmlControllerDependenciesException("No se puede inyectar el valor. Tipo requerido: "
-                            + value.getClass().getName() + ". Tipo encontrado: " + field.getType().getName());
+                    throw new FxmlControllerDependenciesException("Cannot inject the value. Required type: "
+                            + value.getClass().getName() + ". Found type: " + field.getType().getName());
                 }
 
                 field.setAccessible(true);
                 try {
                     field.set(object, value);
                 } catch (IllegalAccessException e) {
-                    throw new FxmlControllerDependenciesException("No se pudo inyectar la referencia.", e);
+                    throw new FxmlControllerDependenciesException("Cannot inject the reference.", e);
                 }
             }
         }

@@ -27,44 +27,33 @@ import javafx.stage.Stage;
 import java.util.logging.Logger;
 
 /**
- * Agrega a la clase anotada el método {@link Reloadable#reloadUI()} que permite recargar la vista dentro del mismo
- * {@link Stage}.<br>
+ * Adds methods to the class that allow to reload the current view within it same {@link Stage}.<br>
  * <br>
- * Se requiere que la clase esté anotada con {@code @}{@link FxmlController} y que tenga un campo anotado
- * con {@code @}{@link ViewStage} el cual debe tener una referencia al {@link Stage} de la vista.
+ * In order to the methods of this interface work, target class must be annotated with{@code @}{@link FxmlController}
+ * and must have a field annotated with {@code @}{@link ViewStage}. If any of these requirements are not met the methods
+ * will not execute its process.<br>
+ * <br>
+ * Methods of this interface are useful if we need to update the texts in the screen after change the application
+ * language, for example.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public interface Reloadable {
 
     Logger LOGGER = Logger.getLogger(Reloadable.class.getName());
 
     /**
-     * Recarga la interfaz de usuario vinculada al controlador que implemente esta interfaz. El controllador tiene que
-     * estar anotado con {@code @}{@link FxmlController} y tener un campo anotado con {@code @}{@link ViewStage} el cual
-     * debe tener una referencia al {@link Stage} de la vista. Si alguna de las condiciones anteriore no se cumple, el
-     * método no ejecutará el proceso de recarga así como ninguno de los procesos asociados.<br>
-     * <br>
-     * Además de recargar la vista, la llamada a este método procesará nuevamente todos los campos anotados del controlador.<br>
-     * <br>
-     * Este método resulta útil cuando cambia el idioma de la aplicación y se necesita actualizar el idioma de los textos
-     * en la pantalla.
+     * Reloads the user interface handle by the controller class which implements this interface. This implies to
+     * process all annotated controller fields.
      */
     default void reloadUI() {
         reload(false);
     }
 
     /**
-     * Recarga completamente la interfaz de usuario vinculada al controlador que implemente esta interfaz. Con "completamente"
-     * se quiere decir que se procesarán todos los miembros anotaciones, tanto campos como métodos.<br>
-     * <br>
-     * El controllador tiene que estar anotado con {@code @}{@link FxmlController} y tener un campo anotado con
-     * {@code @}{@link ViewStage} el cual debe tener una referencia al {@link Stage} de la vista. Si alguna de las
-     * condiciones anteriore no se cumple, el método no ejecutará el proceso de recarga así como ninguno de los procesos
-     * asociados.<br>
-     * <br>
-     * Este método resulta útil cuando cambia el idioma de la aplicación y se necesita actualizar el idioma de los textos
-     * en la pantalla.
+     * Reloads the fully user interface handle by the controller class which implements this interface. "Fully" means
+     * that all controller members (fields and methods) will be processed.
      */
     default void reloadFullyUI() {
         reload(true);
@@ -74,7 +63,7 @@ public interface Reloadable {
         ReflectionUtil.getDeclaredAnnotation(this.getClass(), FxmlController.class)
                 .ifPresentOrElse(
                         a -> reloadViewInStage(a, fully),
-                        () -> getLogger().fine("La clase " + this.getClass().getName() + " no está anotada con @"
+                        () -> getLogger().fine("Class " + this.getClass().getName() + " is not annotated with @"
                                 + FxmlController.class.getName())
                 );
     }
@@ -87,15 +76,16 @@ public interface Reloadable {
                                 // this es el controlador de la vista
                                 Parent root = FxmlViewHelper.loadFxmlViewAsParent(this, fully);
 
-                                // Si el título actual lo obtuvo del parámetro @FxmlController.title, no es necesario cambiarlo, por eso el último null
+                                // Si el título actual lo obtuvo del parámetro @FxmlController.title, no es
+                                // necesario cambiarlo, por eso el último null
                                 StageUtil.setStageTitle(s, fxmlControllerAnnotation.titleKey(), null);
 
                                 s.getScene().setRoot(root);
-                            }, () -> getLogger().fine("El controlador " + this.getClass().getName()
-                                    + " no tiene un campo anotado con @" + ViewStage.class.getName())
+                            }, () -> getLogger().fine("Controller class " + this.getClass().getName()
+                                    + " no have a field annotated with @" + ViewStage.class.getName())
                     );
         } catch (IllegalAccessException | ClassCastException e) {
-            throw new FxmlControllerDependenciesException("No se pudo obtener la referencia al Stage producto a un error.", e);
+            throw new FxmlControllerDependenciesException("Stage reference could not be obtained due to an error.", e);
         }
     }
 

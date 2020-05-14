@@ -16,10 +16,10 @@
 package com.ainoha.core.exception;
 
 /**
- * Indica que ocurrió un error durante el proceso de visualización de vistas de la aplicación. Esta excepción debe
- * lanzarse conteniendo a alguna otra que indique la causa del error.
- * 
+ * An error occurred while showing an application view. Must contain another exception with the error details.
+ *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public class ShowingViewException extends RuntimeException {
 

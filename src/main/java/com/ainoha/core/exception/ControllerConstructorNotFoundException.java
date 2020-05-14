@@ -16,9 +16,10 @@
 package com.ainoha.core.exception;
 
 /**
- * Se lanza para indicar que el controlador de la vista no tiene un constructor sin parámetros o el por defecto.
+ * It is thrown to indicate that a view controller no have a non-parameters or default constructor.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public class ControllerConstructorNotFoundException extends RuntimeException {
 

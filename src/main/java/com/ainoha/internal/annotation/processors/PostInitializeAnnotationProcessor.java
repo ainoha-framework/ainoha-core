@@ -21,16 +21,14 @@ import com.ainoha.core.exception.AnnotationProcessorException;
 import java.lang.reflect.Method;
 
 /**
- * Procesador para la anotación {@code @}{@link PostInitialize}.<br>
+ * Processor for {@code @}{@link PostInitialize} annotation.<br>
  * <br>
- * El método {@link PostInitializeAnnotationProcessor#process(Object, Object)} tiene que recibir como primer parámetro
- * una referencia al método anotado (instancia de {@link Method}) y como segundo parámetro la instancia del controlador
- * que contiene este método.<br>
- * <br>
- * Si ocurre algún error durante la ejecución del método {@link PostInitializeAnnotationProcessor#process(Object, Object)}
- * se lanzará una excepción de tipo {@link AnnotationProcessorException}.
+ * Method {@link PostInitializeAnnotationProcessor#process(Object, Object)} has to receive as first parameter a
+ * reference to the annotated method (an instance of {@link Method}) and as second the controller instance containing
+ * this method.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 class PostInitializeAnnotationProcessor implements AnnotationProcessor {
     @Override

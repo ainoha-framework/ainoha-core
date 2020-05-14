@@ -24,9 +24,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Clase para agrupar utilidades comunes al trabajo con {@link Stage}s.
+ * Common utilities for working with {@link Stage}s
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public final class StageUtil {
 
@@ -35,13 +36,13 @@ public final class StageUtil {
     private StageUtil() {}
 
     /**
-     * Permite ponerle título a la ventana asociada al Stage {@code viewStage}.
+     * Allows to set the title of the window associted to {@code viewStage}
      *
-     * @param viewStage Ventana a la que se le pondrá el título
-     * @param stageTitleKey Clave del título de la ventana dentro de los recursos de idioma. Si es {@code null} o
-     *                      {@link String#isBlank()} devuelve {@code true}, será desechado y portanto no procesado
-     * @param stageTitle Título de la ventana. Sobrescribe a {@code stageTitleKey} si su valor es diferente de {@code null}
-     *                   y {@link String#isBlank()} retorna {@code false}
+     * @param viewStage     Target window
+     * @param stageTitleKey Title key from language resources. If {@code null} or {@link String#isBlank()} returns
+     *                      {@code true} will be ignored
+     * @param stageTitle    Window title. Override {@code stageTitleKey} if is not {@code null} and
+     *                      {@link String#isBlank()} returns {@code false}
      */
     public static void setStageTitle(Stage viewStage, String stageTitleKey, String stageTitle) {
         if (stageTitle != null && !stageTitle.isBlank()) {
@@ -55,11 +56,10 @@ public final class StageUtil {
                 stageTitleValue = context.getDefaultResourceBundle() != null ? context.getDefaultResourceBundle().getString(stageTitleKey) : "";
                 stageTitleValue = rb != null ? rb.getString(stageTitleKey) : stageTitleValue;
             } catch (MissingResourceException e) {
-                LOGGER.severe("No se encontró la clave '" + stageTitleKey + "', correspondiente al " +
-                        "título de la vista, en el archivo de idioma.");
+                LOGGER.severe("Window title language key '" + stageTitleKey + "' was not found.");
             } catch (RuntimeException e) {
-                LOGGER.severe("Ocurrió un error intentando obtener el valor de la clave '" + stageTitleKey
-                        + "', correspondiente al título de la vista, en el archivo de idioma.");
+                LOGGER.severe("An error occurs trying to get the value of the window title language key '"
+                                      + stageTitleKey + "'");
                 LOGGER.log(Level.FINE, "", e);
             }
             viewStage.setTitle(stageTitleValue);

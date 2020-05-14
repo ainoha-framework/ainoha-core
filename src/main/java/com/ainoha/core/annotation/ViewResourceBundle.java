@@ -22,10 +22,11 @@ import java.lang.annotation.Target;
 import java.util.ResourceBundle;
 
 /**
- * Permite marcar un campo de tipo {@link ResourceBundle} dentro de un controlador para inyectarle los
- * recursos de idioma de la aplicación.
+ * Allow to inject, into the annotated field (of type {@link ResourceBundle}), a reference to the application
+ * language resource for the current {@link java.util.Locale}.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

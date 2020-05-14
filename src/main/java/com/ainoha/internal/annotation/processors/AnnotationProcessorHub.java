@@ -24,6 +24,7 @@ import java.util.Set;
 
 /**
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 public final class AnnotationProcessorHub {
     private final static Map<Class, AnnotationProcessor> processors;

@@ -21,10 +21,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Permite marcar un campo de tipo {@link java.net.URL} dentro de un controlador para inyectarle la URL correspondiente
- * al archivo {@code .fxml} de la vista asociada.
+ * Allow to inject, into the annotated field, a reference to the FXML view file {@link java.net.URL}.
  *
  * @author Eduardo Betanzos
+ * @since 1.0
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
