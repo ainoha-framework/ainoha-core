@@ -50,7 +50,7 @@ class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
 
             field.setAccessible(true);
             TableView tableView = (TableView) field.get(source);
-            addTableColumsDataBinding(tableView.getColumns());
+            addTableColumnsDataBinding(tableView.getColumns());
         } catch (AnnotationProcessorException e) {
             throw e;
         } catch (Exception e) {
@@ -63,7 +63,7 @@ class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
      *
      * @see TableViewBinding
      */
-    public static void addTableColumsDataBinding(ObservableList columns) {
+    private void addTableColumnsDataBinding(ObservableList columns) {
         columns.stream().forEach(column -> {
             TableColumn tableColumn = (TableColumn) column;
 
@@ -71,7 +71,7 @@ class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
             if (chlidColumns.isEmpty()) {
                 tableColumn.setCellValueFactory(new PropertyValueFactory(tableColumn.getId()));
             } else {
-                addTableColumsDataBinding(chlidColumns);
+                addTableColumnsDataBinding(chlidColumns);
             }
         });
     }
