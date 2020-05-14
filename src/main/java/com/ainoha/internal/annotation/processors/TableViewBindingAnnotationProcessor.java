@@ -63,13 +63,11 @@ class TableViewBindingAnnotationProcessor implements AnnotationProcessor {
      *
      * @see TableViewBinding
      */
-    private void addTableColumnsDataBinding(ObservableList columns) {
+    private void addTableColumnsDataBinding(ObservableList<TableColumn> columns) {
         columns.stream().forEach(column -> {
-            TableColumn tableColumn = (TableColumn) column;
-
-            ObservableList chlidColumns = tableColumn.getColumns();
+            ObservableList chlidColumns = column.getColumns();
             if (chlidColumns.isEmpty()) {
-                tableColumn.setCellValueFactory(new PropertyValueFactory(tableColumn.getId()));
+                column.setCellValueFactory(new PropertyValueFactory(column.getId()));
             } else {
                 addTableColumnsDataBinding(chlidColumns);
             }
