@@ -15,6 +15,7 @@
  */
 package com.ainoha.internal.annotation.processors;
 
+import com.ainoha.core.annotation.CssPressedStyleOnTouch;
 import com.ainoha.core.annotation.PostInitialize;
 import com.ainoha.core.annotation.TableViewBinding;
 import com.ainoha.core.validators.InputValidator;
@@ -35,7 +36,8 @@ public final class AnnotationProcessorHub {
         processors = Map.of(
                 PostInitialize.class, new PostInitializeAnnotationProcessor(),
                 InputValidator.class, new InputValidatorAnnotationProcessor(),
-                TableViewBinding.class, new TableViewBindingAnnotationProcessor()
+                TableViewBinding.class, new TableViewBindingAnnotationProcessor(),
+                CssPressedStyleOnTouch.class, new CssPressedStyleOnTouchAnnotationProcessor()
         );
     }
 
