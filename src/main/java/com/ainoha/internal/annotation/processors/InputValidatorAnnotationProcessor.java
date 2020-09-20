@@ -28,9 +28,9 @@ import java.util.regex.Pattern;
 /**
  * Processor for {@code @}{@link InputValidator} annotation.<br>
  * <br>
- * Method {@link InputValidatorAnnotationProcessor#process(Object, Object)} has to receive as first parameter a
- * reference to the annotated field (an instance of {@link Field}) and as second the controller instance containing
- * this field.
+ * {@link InputValidatorAnnotationProcessor#process(Object, Object)} method must receive as first parameter a
+ * reference to the annotated field (an instance of {@link Field}) and as second the controller instance
+ * containing this field. The annotated field must by an instance of {@link InputValidator}.
  *
  * @author Eduardo Betanzos
  * @since 1.0

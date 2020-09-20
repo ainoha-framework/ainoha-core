@@ -23,9 +23,9 @@ import java.lang.reflect.Method;
 /**
  * Processor for {@code @}{@link PostInitialize} annotation.<br>
  * <br>
- * Method {@link PostInitializeAnnotationProcessor#process(Object, Object)} has to receive as first parameter a
- * reference to the annotated method (an instance of {@link Method}) and as second the controller instance containing
- * this method.
+ * {@link PostInitializeAnnotationProcessor#process(Object, Object)} method must receive as first parameter a
+ * reference to the annotated method (an instance of {@link Method}) and as second the controller instance
+ * containing this method.
  *
  * @author Eduardo Betanzos
  * @since 1.0

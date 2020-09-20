@@ -27,9 +27,9 @@ import java.lang.reflect.Field;
 /**
  * Processor for {@code @}{@link TableViewBinding} annotation.<br>
  * <br>
- * Method {@link TableViewBindingAnnotationProcessor#process(Object, Object)} has to receive as first parameter a
+ * {@link TableViewBindingAnnotationProcessor#process(Object, Object)} method must receive as first parameter a
  * reference to the annotated field (an instance of {@link Field}) and as second the controller instance containing
- * this field. The annotated field must by an instance of {@link javafx.scene.control.TableView}
+ * this field. The annotated field must by an instance of {@link TableView}.
  *
  * @author Eduardo Betanzos
  * @since 1.0
