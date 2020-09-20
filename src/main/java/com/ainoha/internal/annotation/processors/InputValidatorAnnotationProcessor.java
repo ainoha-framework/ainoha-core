@@ -42,11 +42,22 @@ class InputValidatorAnnotationProcessor implements AnnotationProcessor {
         try {
             Field field = (Field) target;
 
+            if (!TextInputControl.class.isAssignableFrom(field.getType())) {
+                throw new AnnotationProcessorException(
+                        "Annotation @" + InputValidator.class.getName()
+                                + " can be used only in fields of type " + TextInputControl.class.getName()
+                                + ", or any of it subclasses"
+                                + ". Found field type: " + field.getType().getName()
+                );
+            }
+
             InputValidator annotation = field.getDeclaredAnnotation(InputValidator.class);
 
             field.setAccessible(true);
             TextInputControl inputControl = (TextInputControl) field.get(source);
             addValidator(inputControl, annotation.pattern(), annotation.maxLength());
+        } catch (AnnotationProcessorException e) {
+            throw e;
         } catch (Exception e) {
             throw new AnnotationProcessorException(e);
         }

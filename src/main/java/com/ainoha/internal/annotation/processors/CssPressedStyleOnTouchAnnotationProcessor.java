@@ -40,9 +40,20 @@ class CssPressedStyleOnTouchAnnotationProcessor implements AnnotationProcessor {
         try {
             Field field = (Field) target;
 
+            if (!Node.class.isAssignableFrom(field.getType())) {
+                throw new AnnotationProcessorException(
+                        "Annotation @" + CssPressedStyleOnTouch.class.getName()
+                                + " can be used only in fields of type " + Node.class.getName()
+                                + ", or any of it subclasses"
+                                + ". Found field type: " + field.getType().getName()
+                );
+            }
+
             field.setAccessible(true);
             Node node = (Node) field.get(source);
             addTouchPressedFilter(node);
+        } catch (AnnotationProcessorException e) {
+            throw e;
         } catch (Exception e) {
             throw new AnnotationProcessorException(e);
         }
