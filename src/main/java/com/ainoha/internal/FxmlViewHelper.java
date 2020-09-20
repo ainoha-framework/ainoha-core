@@ -387,10 +387,8 @@ public final class FxmlViewHelper {
             AnnotationProcessorHub.registeredProcessorClasses()
                     .stream()
                     .filter(accessibleObject::isAnnotationPresent)
-                    .forEach(annotationClass -> AnnotationProcessorHub
-                            .forAnnotationClass(annotationClass)
-                            .process(accessibleObject, viewController)
-                    );
+                    .map(AnnotationProcessorHub::forAnnotationClass)
+                    .forEach(annotationProcessor -> annotationProcessor.process(accessibleObject, viewController));
         }
     }
 
@@ -403,14 +401,15 @@ public final class FxmlViewHelper {
         Field[] fields = viewController.getClass().getDeclaredFields();
 
         for (var field : fields) {
+            if (field.getAnnotation(FXML.class) == null) {
+                continue;
+            }
+
             AnnotationProcessorHub.registeredProcessorClasses()
                     .stream()
-                    .filter(registeredProcessorClass -> field.getAnnotation(FXML.class) != null
-                            && field.isAnnotationPresent(registeredProcessorClass))
-                    .forEach(annotationClass -> AnnotationProcessorHub
-                            .forAnnotationClass(annotationClass)
-                            .process(field, viewController)
-                    );
+                    .filter(field::isAnnotationPresent)
+                    .map(AnnotationProcessorHub::forAnnotationClass)
+                    .forEach(annotationProcessor -> annotationProcessor.process(field, viewController));
         }
     }
 }
