@@ -19,6 +19,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public abstract class CssPressedStyleOnTouchAnnotationProcessorTest {
 
+    /*
+        IMPORTANT!
+        ----------------
+        ALL tests of this class are running as part of class com.ainoha.gui.GuiDependentWrapperTest
+    */
+
     @Test
     public void processFailInvalidTargetFieldType() {
         Field nonNodeField = FieldMother.getObjectField();
@@ -39,7 +45,14 @@ public abstract class CssPressedStyleOnTouchAnnotationProcessorTest {
         Field paneField = FieldMother.getDeclaredField(controller.getClass(), "pane");
         var processor = new CssPressedStyleOnTouchAnnotationProcessor();
 
+        // Apply the processor
         processor.process(paneField, controller);
+
+        var pressedPseudoClass = PseudoClass.getPseudoClass("pressed");
+
+        // Before trigger the event :pressed can`t be present
+        assertThat(pane.getPseudoClassStates())
+                .doesNotContain(pressedPseudoClass);
 
         // Trigger a touch pressed event
         var touchPressedPoint = new TouchPoint(1, TouchPoint.State.PRESSED, 0, 0, 0, 0, pane, new PickResult(pane, 0, 0));
@@ -48,8 +61,7 @@ public abstract class CssPressedStyleOnTouchAnnotationProcessorTest {
 
         // Assert :pressed pseudo-class active
         assertThat(pane.getPseudoClassStates())
-                .hasSize(1)
-                .containsExactly(PseudoClass.getPseudoClass("pressed"));
+                .contains(pressedPseudoClass);
 
         // Trigger a touch released event
         var touchReleasedPoint = new TouchPoint(1, TouchPoint.State.RELEASED, 0, 0, 0, 0, pane, new PickResult(pane, 0, 0));
@@ -58,6 +70,6 @@ public abstract class CssPressedStyleOnTouchAnnotationProcessorTest {
 
         // Assert :pressed pseudo-class inactive
         assertThat(pane.getPseudoClassStates())
-                .hasSize(0);
+                .doesNotContain(pressedPseudoClass);
     }
 }
