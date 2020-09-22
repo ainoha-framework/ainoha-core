@@ -46,4 +46,8 @@ public final class ViewTestController {
     public TableView getTableView() {
         return tableView;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }

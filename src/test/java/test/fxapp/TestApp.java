@@ -16,6 +16,9 @@ public class TestApp extends Application implements ViewLoader {
     public static void runApp(String[] args) {
         Locale.setDefault(new Locale("en"));
         try {
+            // Disabling the JavaFX thread check. This allows to change
+            // the UI state from a thread other than JavaFX client thread
+            System.setProperty("glass.disableThreadChecks", "true");
             ApplicationContext.startApplication(TestApp.class, args);
         } catch (Exception e) {
             e.printStackTrace();

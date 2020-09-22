@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 /**
  * Adds methods to the class that allow to reload the current view within it same {@link Stage}.<br>
  * <br>
- * In order to the methods of this interface work, target class must be annotated with{@code @}{@link FxmlController}
+ * In order to the methods of this interface work, target class must be annotated with {@code @}{@link FxmlController}
  * and must have a field annotated with {@code @}{@link ViewStage}. If any of these requirements are not met the methods
  * will not execute its process.<br>
  * <br>
@@ -78,7 +78,12 @@ public interface Reloadable {
 
                                 // Si el título actual lo obtuvo del parámetro @FxmlController.title, no es
                                 // necesario cambiarlo, por eso el último null
-                                StageUtil.setStageTitle(s, fxmlControllerAnnotation.titleKey(), null);
+                                StageUtil.setStageTitle(
+                                        ApplicationContext.instance(),
+                                        s,
+                                        fxmlControllerAnnotation.titleKey(),
+                                        null
+                                );
 
                                 s.getScene().setRoot(root);
                             }, () -> getLogger().fine("Controller class " + this.getClass().getName()

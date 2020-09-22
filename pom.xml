@@ -57,6 +57,11 @@
             <version>3.17.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>3.5.11</version>
+        </dependency>
     </dependencies>
 
     <distributionManagement>
@@ -89,7 +94,7 @@
                     <argLine>
                         --add-exports ainoha.core/test.fxapp=javafx.graphics
                         --add-opens ainoha.core/test.fxapp=javafx.fxml
-                        --add-opens ainoha.core/com.ainoha.internal.annotation.processors=ALL-UNNAMED
+                        --add-opens ainoha.core/com.ainoha.gui=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>

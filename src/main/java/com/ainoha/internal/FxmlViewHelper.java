@@ -337,7 +337,7 @@ public final class FxmlViewHelper {
         injectControllerDependencies(viewController, viewStage, viewStage.getScene(), rb, loader.getLocation());
 
         // Set window title
-        StageUtil.setStageTitle(viewStage, stageTitleKey, stageTitle);
+        StageUtil.setStageTitle(context, viewStage, stageTitleKey, stageTitle);
 
         // Process all controller class members (fields and methods) related with Ainoha Framework
         processControllerAnnotations(viewController);

@@ -36,25 +36,27 @@ public final class StageUtil {
     private StageUtil() {}
 
     /**
-     * Allows to set the title of the window associted to {@code viewStage}
+     * Allows to set the title of the window associated to {@code viewStage}
      *
+     * @param context       The application context
      * @param viewStage     Target window
      * @param stageTitleKey Title key from language resources. If {@code null} or {@link String#isBlank()} returns
      *                      {@code true} will be ignored
      * @param stageTitle    Window title. Override {@code stageTitleKey} if is not {@code null} and
      *                      {@link String#isBlank()} returns {@code false}
      */
-    public static void setStageTitle(Stage viewStage, String stageTitleKey, String stageTitle) {
+    public static void setStageTitle(ApplicationContext context, Stage viewStage, String stageTitleKey, String stageTitle) {
         if (stageTitle != null && !stageTitle.isBlank()) {
             viewStage.setTitle(stageTitle);
         } else if (stageTitleKey != null && !stageTitleKey.isBlank()) {
             String stageTitleValue = "";
             try {
-                ApplicationContext context = ApplicationContext.instance();
                 ResourceBundle rb = context.getResourceBundle();
 
-                stageTitleValue = context.getDefaultResourceBundle() != null ? context.getDefaultResourceBundle().getString(stageTitleKey) : "";
-                stageTitleValue = rb != null ? rb.getString(stageTitleKey) : stageTitleValue;
+                String defaultStageTitleValue = context.getDefaultResourceBundle() != null
+                        ? context.getDefaultResourceBundle().getString(stageTitleKey)
+                        : "";
+                stageTitleValue = rb != null ? rb.getString(stageTitleKey) : defaultStageTitleValue;
             } catch (MissingResourceException e) {
                 LOGGER.severe("Window title language key '" + stageTitleKey + "' was not found.");
             } catch (RuntimeException e) {
