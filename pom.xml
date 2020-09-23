@@ -95,6 +95,7 @@
                         --add-exports ainoha.core/test.fxapp=javafx.graphics
                         --add-opens ainoha.core/test.fxapp=javafx.fxml
                         --add-opens ainoha.core/com.ainoha.gui=ALL-UNNAMED
+                        --add-opens ainoha.core/com.ainoha.core=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>

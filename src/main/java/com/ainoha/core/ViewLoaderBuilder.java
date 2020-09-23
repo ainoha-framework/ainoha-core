@@ -228,6 +228,7 @@ public final class ViewLoaderBuilder {
         modality = null;
         stageStyle = null;
         resizable = true;
+        maximized = false;
         fullScreen = false;
         fullScreenExitHint = null;
         fullScreenExitKeyCombination = null;
