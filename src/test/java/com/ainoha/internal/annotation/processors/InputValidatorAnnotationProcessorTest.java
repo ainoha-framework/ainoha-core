@@ -17,6 +17,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public abstract class InputValidatorAnnotationProcessorTest {
 
+    /*
+        IMPORTANT!
+        ----------------
+        ALL tests of this class are running as part of class com.ainoha.gui.GuiDependentWrapperTest
+    */
+
     @Test
     public void processFailInvalidTargetFieldType() {
         Field nonTextInputControlField = FieldMother.getObjectField();

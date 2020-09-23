@@ -18,6 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public abstract class TableViewBindingAnnotationProcessorTest {
 
+    /*
+        IMPORTANT!
+        ----------------
+        ALL tests of this class are running as part of class com.ainoha.gui.GuiDependentWrapperTest
+    */
+
     @Test
     public void processFailInvalidTargetFieldType() {
         Field nonTableViewField = FieldMother.getObjectField();

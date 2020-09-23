@@ -7,6 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class PostInitializeAnnotationProcessorTest {
 
+    /*
+        IMPORTANT!
+        ----------------
+        ALL tests of this class are running as part of class com.ainoha.gui.GuiDependentWrapperTest
+    */
+
     @Test
     public void process() {
         // The ViewTestController is injected in the ViewControllersHub
