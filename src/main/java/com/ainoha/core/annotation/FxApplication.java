@@ -23,8 +23,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This is the Ainoha Framework most important annotation which must be used in the main JavaFX application class (
- * which inherits from {@link javafx.application.Application}).<br>
+ * This is the most important annotation in Ainoha Framework and must be used in the main class
+ * of the JavaFX application (which inherits from {@link javafx.application.Application}).<br>
  * <br>
  * The annotated class must be used to start the application through
  * {@link ApplicationContext#startApplication(Class, String...)}.
