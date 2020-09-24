@@ -1,0 +1,50 @@
+name: Deploy Maven artifact to Nexus Repository OSS
+
+# Trigger the workflow on push tags
+# Then we restrict the jobs to only runs when pushing tags referring master
+on:
+  push:
+    tags:
+      - 'v**'
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Check tag commit exists in master
+        uses: betanzos/check-commit-exist@v1
+        with:
+          commit: ${{ github.sha }}
+
+      - name: Move git HEAD to target commit (GITHUB_SHA)
+        run: |
+          git checkout $env:GITHUB_SHA
+
+      - name: Setup Java
+        uses: actions/setup-java@v1.4.2
+        with:
+          java-version: '11'
+
+      - name: Create settings.xml
+        shell: bash
+        run: |
+          echo "${{ secrets.SETTINGS_XML_DEPLOY }}" > settings.xml
+
+      - name: Import Ainoha Framework GPG key
+        shell: bash
+        run: |
+          echo "${{ secrets.GPG_KEY }}" > ainoha-gpg.key
+          gpg --pinentry-mode=loopback --passphrase "${{ secrets.GPG_PASSPHRASE }}" --import ainoha-gpg.key
+
+      - name: Deploy Maven artifact
+        shell: bash
+        run: |
+          mvn -B -s settings.xml deploy -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}"
