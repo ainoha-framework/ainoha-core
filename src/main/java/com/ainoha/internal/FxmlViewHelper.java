@@ -189,7 +189,7 @@ public final class FxmlViewHelper {
                 // Processes controller class fields related with Ainoha Framework and annotated with
                 // {@code @}{@link FXML} too
                 // This is needed because when the view is loaded by JavaFX all controller fields annotated with
-                // {@code @}{@link FXML} are reprocessed and any previus processing doing by Ainoha Framework will
+                // {@code @}{@link FXML} are reprocessed and any previous processing doing by Ainoha Framework will
                 // be lost
                 processControllerAnnotationsForFxmlAnnotatedFields(controller);
             }
