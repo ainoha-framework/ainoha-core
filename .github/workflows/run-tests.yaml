@@ -6,6 +6,10 @@ jobs:
   run-tests:
     runs-on: windows-latest
     timeout-minutes: 10
+    strategy:
+      matrix:
+        java: [ 11, 12, 13, 14, 15 ]
+    name: Test with Java ${{ matrix.java }}
 
     steps:
       - name: Checkout the code
@@ -14,7 +18,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v1.4.2
         with:
-          java-version: '11'
+          java-version: ${{ matrix.java }}
 
       - name: Run tests with Maven
         run: |
