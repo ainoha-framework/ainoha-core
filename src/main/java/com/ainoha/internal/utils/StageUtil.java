@@ -36,7 +36,17 @@ public final class StageUtil {
     private StageUtil() {}
 
     /**
-     * Allows to set the title of the window associated to {@code viewStage}
+     * Allows to set the title of the window associated to {@code viewStage}.<br>
+     * <br>
+     * When {@code stageTitle} has a valid value (not {@code null} and not blank: see {@link String#isBlank()})
+     * it will be used as the window title and {@code stageTitleKey} will be ignored.<br>
+     * <br>
+     * When {@code stageTitle} has an invalid value {@code stageTitleKey} will be used to get the window title
+     * from the language resources. If {@code stageTitleKey} has an invalid value ({@code null} or blank: see
+     * {@link String#isBlank()}), the key value not found or an exception is thrown when getting the key value,
+     * then the window title will be an empty string.<br>
+     * <br>
+     * If {@code stageTitle} and {@code stageTitleKey} values are no valid the window title will be not changed.
      *
      * @param context       The application context
      * @param viewStage     Target window
