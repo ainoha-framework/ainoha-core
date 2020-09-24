@@ -1,0 +1,21 @@
+name: Run tests with Maven
+
+on: [push, pull_request]
+
+jobs:
+  run-tests:
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v1.4.2
+        with:
+          java-version: '11'
+
+      - name: Run tests with Maven
+        run: |
+          mvn -B clean test
