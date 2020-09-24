@@ -71,7 +71,7 @@ public final class ReflectionUtil {
         return constructor.newInstance();
     }
 
-    public static <T> Optional<T> getFieldValueFromController(Object controller, Class<? extends Annotation> annotation) throws IllegalAccessException {
+    public static <T> Optional<T> getFirstAnnotatedFieldValueFromController(Object controller, Class<? extends Annotation> annotation) throws IllegalAccessException {
         Class controllerClass = controller.getClass();
 
         if (isAnnotatedWith(controllerClass, FxmlController.class)) {

@@ -104,31 +104,31 @@ public class ReflectionUtilTest {
                 .isExactlyInstanceOf(newObjectClass);
     }
 
-    // TESTS FOR METHOD: getFieldValueFromController()
+    // TESTS FOR METHOD: getFirstAnnotatedFieldValueFromController()
     @Test
-    public void getFieldValueFromControllerReturnsEmptyOptionalIfNotAnnotatedWithFxmlController() throws IllegalAccessException {
+    public void getFirstAnnotatedFieldValueFromControllerReturnsEmptyOptionalIfNotAnnotatedWithFxmlController() throws IllegalAccessException {
         var dummyClass = new DummyClass();
 
-        assertThat(ReflectionUtil.getFieldValueFromController(dummyClass, null))
+        assertThat(ReflectionUtil.getFirstAnnotatedFieldValueFromController(dummyClass, null))
                 .isNotNull()
                 .isEmpty();
     }
 
     @Test
-    public void getFieldValueFromControllerReturnsEmptyOptionalIfThereAreNoAnnotatedFields() throws IllegalAccessException {
+    public void getFirstAnnotatedFieldValueFromControllerReturnsEmptyOptionalIfThereAreNoAnnotatedFields() throws IllegalAccessException {
         var dummyClass = new DummyClass();
 
-        assertThat(ReflectionUtil.getFieldValueFromController(dummyClass, FXML.class))
+        assertThat(ReflectionUtil.getFirstAnnotatedFieldValueFromController(dummyClass, FXML.class))
                 .isNotNull()
                 .isEmpty();
     }
 
     @Test
-    public void getFieldValueFromController() throws IllegalAccessException {
+    public void getFirstAnnotatedFieldValueFromController() throws IllegalAccessException {
         var dummyController = new DummyController();
         dummyController.privateStr = "test";
 
-        assertThat(ReflectionUtil.getFieldValueFromController(dummyController, FXML.class))
+        assertThat(ReflectionUtil.getFirstAnnotatedFieldValueFromController(dummyController, FXML.class))
                 .isNotNull()
                 .isNotEmpty()
                 .get()

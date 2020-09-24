@@ -69,7 +69,7 @@ public interface Reloadable {
     private void reloadViewInStage(FxmlController fxmlControllerAnnotation, boolean fully) {
         try {
             // Get the Stage reference
-            ReflectionUtil.<Stage>getFieldValueFromController(this, ViewStage.class)
+            ReflectionUtil.<Stage>getFirstAnnotatedFieldValueFromController(this, ViewStage.class)
                     .ifPresentOrElse(s -> {
                                 // `this` is the view controller
                                 Parent root = FxmlViewHelper.loadFxmlViewAsParent(this, fully);
