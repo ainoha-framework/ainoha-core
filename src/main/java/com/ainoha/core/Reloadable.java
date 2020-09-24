@@ -41,11 +41,9 @@ import java.util.logging.Logger;
  */
 public interface Reloadable {
 
-    Logger LOGGER = Logger.getLogger(Reloadable.class.getName());
-
     /**
      * Reloads the user interface handle by the controller class which implements this interface. This implies to
-     * process all annotated controller fields.
+     * process all annotated (with Ainoha Framework annotations) controller fields.
      */
     default void reloadUI() {
         reload(false);
@@ -53,7 +51,7 @@ public interface Reloadable {
 
     /**
      * Reloads the fully user interface handle by the controller class which implements this interface. "Fully" means
-     * that all controller members (fields and methods) will be processed.
+     * that all annotated (with Ainoha Framework annotations) controller members (fields and methods) will be processed.
      */
     default void reloadFullyUI() {
         reload(true);
@@ -70,14 +68,14 @@ public interface Reloadable {
 
     private void reloadViewInStage(FxmlController fxmlControllerAnnotation, boolean fully) {
         try {
-            // Obtener la referencia al Stage de la vista
+            // Get the Stage reference
             ReflectionUtil.<Stage>getFieldValueFromController(this, ViewStage.class)
                     .ifPresentOrElse(s -> {
-                                // this es el controlador de la vista
+                                // `this` is the view controller
                                 Parent root = FxmlViewHelper.loadFxmlViewAsParent(this, fully);
 
-                                // Si el título actual lo obtuvo del parámetro @FxmlController.title, no es
-                                // necesario cambiarlo, por eso el último null
+                                // If current title was obtained from @FxmlController.title param,
+                                // is not necessary change it. Last `null` is because of this.
                                 StageUtil.setStageTitle(
                                         ApplicationContext.instance(),
                                         s,
