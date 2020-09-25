@@ -14,12 +14,18 @@ If you are not familiar with `FXML` you can take a look at the
 [official documentation](https://docs.oracle.com/javase/8/javafx/fxml-tutorial/why_use_fxml.htm).
 
 ## Usage
-Next sections show how to start using this framework to develop a non-modular application.
+Next sections show how to start using this framework to develop a non-modular application
+(*the full code can be found here:
+[non-modular-hello-world](https://github.com/ainoha-framework/examples/tree/master/hello-world/non-modular-hello-world)*).
 
 ---
+
 ***WARNING!***
 *Developing modular applications requires make some configurations in the `module-info.java`
-file. In the documentation we will address this issue (soon).*
+file. In the documentation we will address this issue (soon). An application example of this
+can be found here:
+[modular-hello-world](https://github.com/ainoha-framework/examples/tree/master/hello-world/modular-hello-world)).*
+
 ---
 
 ### Add Maven dependency
