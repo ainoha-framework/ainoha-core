@@ -30,9 +30,9 @@ import java.util.Objects;
  * @author Eduardo Betanzos
  * @since 1.0
  */
-public final class ViewLoaderBuilder {
+public final class ViewLoaderBuilder<T> {
 
-    private Class controllerClass;
+    private final Class<T> controllerClass;
     private Stage viewStage;
     private Stage owner;
     private Object params;
@@ -44,7 +44,7 @@ public final class ViewLoaderBuilder {
     private String fullScreenExitHint;
     private KeyCombination fullScreenExitKeyCombination;
 
-    public ViewLoaderBuilder(Class controllerClass) {
+    public ViewLoaderBuilder(Class<T> controllerClass) {
         Objects.requireNonNull(controllerClass, "'controllerClass' cannot be null");
         this.controllerClass = controllerClass;
     }
@@ -58,7 +58,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder stage(Stage viewStage) {
+    public ViewLoaderBuilder<T> stage(Stage viewStage) {
         this.viewStage = viewStage;
         return this;
     }
@@ -72,7 +72,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder owner(Stage owner) {
+    public ViewLoaderBuilder<T> owner(Stage owner) {
         this.owner = owner;
         return this;
     }
@@ -86,7 +86,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder userData(Object userData) {
+    public ViewLoaderBuilder<T> userData(Object userData) {
         this.params = userData;
         return this;
     }
@@ -100,7 +100,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder modality(Modality modality) {
+    public ViewLoaderBuilder<T> modality(Modality modality) {
         this.modality = modality;
         return this;
     }
@@ -114,7 +114,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder stageStyle(StageStyle stageStyle) {
+    public ViewLoaderBuilder<T> stageStyle(StageStyle stageStyle) {
         this.stageStyle = stageStyle;
         return this;
     }
@@ -126,7 +126,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder notResizable() {
+    public ViewLoaderBuilder<T> notResizable() {
         this.resizable = false;
         return this;
     }
@@ -138,7 +138,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder maximized() {
+    public ViewLoaderBuilder<T> maximized() {
         this.maximized = true;
         return this;
     }
@@ -155,7 +155,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder fullScreenExitHint(String fullScreenExitHint) {
+    public ViewLoaderBuilder<T> fullScreenExitHint(String fullScreenExitHint) {
         this.fullScreenExitHint = fullScreenExitHint;
         return this;
     }
@@ -172,7 +172,7 @@ public final class ViewLoaderBuilder {
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder fullScreenExitKeyCombination(KeyCombination fullScreenExitKeyCombination) {
+    public ViewLoaderBuilder<T> fullScreenExitKeyCombination(KeyCombination fullScreenExitKeyCombination) {
         this.fullScreenExitKeyCombination = fullScreenExitKeyCombination;
         return this;
     }
@@ -180,9 +180,11 @@ public final class ViewLoaderBuilder {
     /**
      * Shows the view using parameters defined before call this method. If no explicit values are defined for the view
      * parameters, default values will be used.
+     *
+     * @return Controller instance of the displayed view
      */
-    public void show() {
-        FxmlViewHelper.showFxmlView(
+    public T show() {
+        return FxmlViewHelper.showFxmlView(
                 controllerClass,
                 viewStage,
                 owner,
@@ -201,21 +203,25 @@ public final class ViewLoaderBuilder {
      * Shows the view undecorated by defining {@link StageStyle#UNDECORATED} as value for the {@code stageStyle}
      * parameter.
      *
+     * @return Controller instance of the displayed view
+     *
      * @see ViewLoaderBuilder#show()
      */
-    public void showUndecorated() {
+    public T showUndecorated() {
         stageStyle = StageStyle.UNDECORATED;
-        show();
+        return show();
     }
 
     /**
      * Shows the view in fullscreen mode.
      *
+     * @return Controller instance of the displayed view
+     *
      * @see ViewLoaderBuilder#show()
      */
-    public void showFullScreen() {
+    public T showFullScreen() {
         fullScreen = true;
-        show();
+        return show();
     }
 
     /**

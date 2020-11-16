@@ -78,7 +78,7 @@ public final class FxmlViewHelper {
      *
      * @throws ShowingViewException If an error occurs during method execution. Cause must contain more details
      */
-    public static void showFxmlView(Class controllerClass, Stage viewStage, Stage owner, Object params, Modality modality,
+    public static <T> T showFxmlView(Class<T> controllerClass, Stage viewStage, Stage owner, Object params, Modality modality,
                                     StageStyle stageStyle, boolean resizable, boolean maximized, boolean fullScreen,
                                     String fullScreenExitHint, KeyCombination fullScreenExitKeyCombination) {
 
@@ -134,7 +134,7 @@ public final class FxmlViewHelper {
             }
 
             // Create view controller instance
-            Object controller = getControllerInstance(controllerClass);
+            T controller = getControllerInstance(controllerClass);
 
             // Load the FXML view file into the Stage
             viewFilePath = controllerMetadata.viewFilePath;
@@ -142,6 +142,8 @@ public final class FxmlViewHelper {
 
             // Display the view
             stage.show();
+
+            return controller;
         } catch (Exception e) {
             throw new ShowingViewException("An error occurred while showing the view '" + viewFilePath + "'", e);
         }
@@ -271,11 +273,12 @@ public final class FxmlViewHelper {
      * @throws InstantiationException                 If {@code controllerClass} is an abstract class
      *
      */
-    private static Object getControllerInstance(Class controllerClass)
+    @SuppressWarnings("unchecked")
+    private static <T> T getControllerInstance(Class<T> controllerClass)
             throws IllegalAccessException, InvocationTargetException, InstantiationException {
 
         try {
-            return ReflectionUtil.newInstanceOf(controllerClass);
+            return (T) ReflectionUtil.newInstanceOf(controllerClass);
         } catch (NoSuchMethodException e) {
             throw new ControllerConstructorNotFoundException("Non-argument constructor, or default, was not found in "
                     + "class " + controllerClass.getName());
