@@ -82,12 +82,12 @@ public final class ViewLoaderBuilder<T> {
      * <br>
      * Default: {@code null}
      *
-     * @param userData Data to pass
+     * @param params Data to pass
      *
      * @return {@code this}
      */
-    public ViewLoaderBuilder<T> userData(Object userData) {
-        this.params = userData;
+    public ViewLoaderBuilder<T> viewParams(Object params) {
+        this.params = params;
         return this;
     }
 

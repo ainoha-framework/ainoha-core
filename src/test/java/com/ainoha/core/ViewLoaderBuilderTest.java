@@ -53,7 +53,7 @@ public final class ViewLoaderBuilderTest {
                 () -> {
                     assertNull(getFieldValue(ViewLoaderBuilder.class, "params", builder));
                     var params = "param1";
-                    builder.userData(params);
+                    builder.viewParams(params);
                     assertEquals(params, getFieldValue(ViewLoaderBuilder.class, "params", builder));
                 },
 
@@ -164,7 +164,7 @@ public final class ViewLoaderBuilderTest {
         var builder = new ViewLoaderBuilder(ViewTestController.class)
                 .stage(mock(Stage.class))
                 .owner(mock(Stage.class))
-                .userData("param1")
+                .viewParams("param1")
                 .modality(Modality.WINDOW_MODAL)
                 .stageStyle(StageStyle.UNDECORATED)
                 .notResizable()

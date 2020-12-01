@@ -141,7 +141,7 @@ public final class FxmlViewHelper {
 
             // Load the FXML view file into the Stage
             viewFilePath = controllerMetadata.viewFilePath;
-            loadViewFromResources(stage, owner, controller, viewFilePath, controllerMetadata.titleKey, controllerMetadata.title);
+            loadViewFromResources(stage, owner, controller, viewFilePath, controllerMetadata.titleKey, controllerMetadata.title, params);
 
             // Display the view
             if (waitFor) {
@@ -189,7 +189,7 @@ public final class FxmlViewHelper {
             Parent root = loader.load();
 
             // Inject dependencies to the view controller
-            injectControllerDependencies(controller, null, null, rb, loader.getLocation());
+            injectControllerDependencies(controller, null, null, rb, loader.getLocation(), null);
 
             if (fully) {
                 // Processes all controller class members (fields and methods) related with Ainoha Framework
@@ -313,7 +313,8 @@ public final class FxmlViewHelper {
                                               Object viewController,
                                               String viewFilePath,
                                               String stageTitleKey,
-                                              String stageTitle) throws IOException {
+                                              String stageTitle,
+                                              Object viewParams) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(viewController.getClass().getResource(viewFilePath));
 
@@ -344,7 +345,7 @@ public final class FxmlViewHelper {
         }
 
         // Inject dependencies to the view controller
-        injectControllerDependencies(viewController, viewStage, viewStage.getScene(), rb, loader.getLocation());
+        injectControllerDependencies(viewController, viewStage, viewStage.getScene(), rb, loader.getLocation(), viewParams);
 
         // Set window title
         StageUtil.setStageTitle(context, viewStage, stageTitleKey, stageTitle);
@@ -362,7 +363,9 @@ public final class FxmlViewHelper {
      * @param rb             Language resources
      * @param viewURL        FXML view file URL
      */
-    private static void injectControllerDependencies(Object viewController, Stage stage, Scene scene, ResourceBundle rb, URL viewURL) {
+    private static void injectControllerDependencies(Object viewController, Stage stage, Scene scene, ResourceBundle rb,
+                                                     URL viewURL, Object params) {
+
         if (ReflectionUtil.isAnnotatedWith(viewController.getClass(), FxmlController.class)) {
             if (stage != null) {
                 ReflectionUtil.setValueInAnnotatedFields(viewController, ViewStage.class, stage);
@@ -378,6 +381,10 @@ public final class FxmlViewHelper {
 
             if (viewURL != null) {
                 ReflectionUtil.setValueInAnnotatedFields(viewController, ViewFxmlUrl.class, viewURL);
+            }
+
+            if (params != null) {
+                ReflectionUtil.setValueInAnnotatedFields(viewController, ViewParams.class, params);
             }
         }
     }
