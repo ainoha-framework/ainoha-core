@@ -38,7 +38,7 @@ can be found here:
 ```
 
 ### Create a FXML file
-We'll create this file in the package `com.app.views` with the name `main-view.fxml` (*You can
+We'll create this file in the package `com.app.views` with the name `view-main.fxml` (*You can
 use [JavaFX Scene Builder](https://gluonhq.com/products/scene-builder/) for do it*).
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -91,10 +91,10 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 @FxApplication
-public class MyApp extends Application implements ViewLoader {
+public class MyApplication extends Application implements ViewLoader {
 
     public static void main(String[] args) {
-        ApplicationContext.startApplication(MyApp.class, args);
+        ApplicationContext.startApplication(MyApplication.class, args);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class MyApp extends Application implements ViewLoader {
     }
 }
 ```
-The traditional way to start a JavaFX application is by calling the method `launuch()` from
+The traditional way to start a JavaFX application is by calling the method `launch()` from
 the `main()`. With Ainoha Framework the right way is to use
 `ApplicationContext.startApplication(MyApplication.class, args)`.
 
@@ -118,7 +118,7 @@ package com.app;
 
 public final class Launcher {
     public static void main(String[] args) {
-        MyApp.main(args);
+        MyApplication.main(args);
     }
 }
 ```
