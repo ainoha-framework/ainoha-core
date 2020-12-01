@@ -60,6 +60,8 @@ public final class FxmlViewHelper {
      * Show an FXML application view.
      *
      * @param controllerClass    View controller class. Must be annotated with {@code @}{@link FxmlController}
+     * @param waitFor            If {@code true} the view will be displayed using {@link Stage#showAndWait()} method,
+     *                           otherwise, using {@link Stage#show()} method
      * @param viewStage          Stage where the view will be displayed. If is {@code null} one will be created
      * @param owner              Owner of the Stage where the view will be displayed. If is {@code null} will not
      *                           be defined
@@ -78,9 +80,10 @@ public final class FxmlViewHelper {
      *
      * @throws ShowingViewException If an error occurs during method execution. Cause must contain more details
      */
-    public static <T> T showFxmlView(Class<T> controllerClass, Stage viewStage, Stage owner, Object params, Modality modality,
-                                    StageStyle stageStyle, boolean resizable, boolean maximized, boolean fullScreen,
-                                    String fullScreenExitHint, KeyCombination fullScreenExitKeyCombination) {
+    public static <T> T showFxmlView(Class<T> controllerClass, boolean waitFor, Stage viewStage, Stage owner,
+                                     Object params, Modality modality, StageStyle stageStyle, boolean resizable,
+                                     boolean maximized, boolean fullScreen, String fullScreenExitHint,
+                                     KeyCombination fullScreenExitKeyCombination) {
 
         String viewFilePath = null;
 
@@ -141,7 +144,11 @@ public final class FxmlViewHelper {
             loadViewFromResources(stage, owner, controller, viewFilePath, controllerMetadata.titleKey, controllerMetadata.title);
 
             // Display the view
-            stage.show();
+            if (waitFor) {
+                stage.showAndWait();
+            } else {
+                stage.show();
+            }
 
             return controller;
         } catch (Exception e) {

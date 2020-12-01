@@ -178,14 +178,29 @@ public final class ViewLoaderBuilder<T> {
     }
 
     /**
+     * Same behavior that call {@code show(false)}.
+     *
+     * @return Controller instance of the displayed view
+     *
+     * @see #show(boolean)
+     */
+    public T show() {
+        return show(false);
+    }
+
+    /**
      * Shows the view using parameters defined before call this method. If no explicit values are defined for the view
      * parameters, default values will be used.
      *
+     * @param waitFor If {@code true} shows this stage and waits for it to be hidden (closed) before returning
+     *                to the caller (see {@link Stage#showAndWait()} for details).
+     *
      * @return Controller instance of the displayed view
      */
-    public T show() {
+    public T show(boolean waitFor) {
         return FxmlViewHelper.showFxmlView(
                 controllerClass,
+                waitFor,
                 viewStage,
                 owner,
                 params,
@@ -200,28 +215,58 @@ public final class ViewLoaderBuilder<T> {
     }
 
     /**
+     * Same behavior that call {@code showUndecorated(false)}.
+     *
+     * @return Controller instance of the displayed view
+     *
+     * @see #showUndecorated(boolean)
+     *
+     */
+    public T showUndecorated() {
+        return showUndecorated(false);
+    }
+
+    /**
      * Shows the view undecorated by defining {@link StageStyle#UNDECORATED} as value for the {@code stageStyle}
      * parameter.
+     *
+     * @param waitFor If {@code true} shows this stage and waits for it to be hidden (closed) before returning
+     *                to the caller (see {@link Stage#showAndWait()} for details).
      *
      * @return Controller instance of the displayed view
      *
      * @see ViewLoaderBuilder#show()
      */
-    public T showUndecorated() {
+    public T showUndecorated(boolean waitFor) {
         stageStyle = StageStyle.UNDECORATED;
-        return show();
+        return show(waitFor);
+    }
+
+    /**
+     * Same behavior that call {@code showFullScreen(false)}.
+     *
+     * @return Controller instance of the displayed view
+     *
+     * @see #showFullScreen(boolean)
+     *
+     */
+    public T showFullScreen() {
+        return showFullScreen(false);
     }
 
     /**
      * Shows the view in fullscreen mode.
      *
+     * @param waitFor If {@code true} shows this stage and waits for it to be hidden (closed) before returning
+     *                to the caller (see {@link Stage#showAndWait()} for details).
+     *
      * @return Controller instance of the displayed view
      *
      * @see ViewLoaderBuilder#show()
      */
-    public T showFullScreen() {
+    public T showFullScreen(boolean waitFor) {
         fullScreen = true;
-        return show();
+        return show(waitFor);
     }
 
     /**
