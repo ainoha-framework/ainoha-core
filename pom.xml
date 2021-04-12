@@ -6,7 +6,7 @@
     <groupId>com.github.ainoha-framework</groupId>
     <artifactId>ainoha-core</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.RC6</version>
+    <version>1.0</version>
 
     <name>Ainoha Framework</name>
     <description>A lightweight framework for develop JavaFX 11, and later, applications in a fast way.</description>
