@@ -11,7 +11,7 @@ is the better development approach when we use JavaFX. Because of this, Ainoha F
 designed around this feature, and our goal is to improve the way we are using it.
 
 If you are not familiar with `FXML` you can take a look at the
-[official documentation](https://docs.oracle.com/javase/8/javafx/fxml-tutorial/why_use_fxml.htm).
+[official documentation](https://openjfx.io/javadoc/11/javafx.fxml/javafx/fxml/doc-files/introduction_to_fxml.html).
 
 ## Usage
 Next sections show how to start using this framework to develop a non-modular application
