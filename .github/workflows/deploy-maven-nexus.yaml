@@ -1,11 +1,8 @@
 name: Deploy Maven artifact to Nexus Repository OSS
 
-# Trigger the workflow on push tags
-# Then we restrict the jobs to only runs when pushing tags referring master
 on:
-  push:
-    tags:
-      - 'v**'
+  release:
+    types: [created]
 
 jobs:
   deploy:
@@ -15,22 +12,11 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-        with:
-          ref: master
-          fetch-depth: 0
-
-      - name: Check tag commit exists in master
-        uses: betanzos/check-commit-exist@v1
-        with:
-          commit: ${{ github.sha }}
-
-      - name: Move git HEAD to target commit (GITHUB_SHA)
-        run: |
-          git checkout $env:GITHUB_SHA
 
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2.3.0
         with:
+          distribution: 'temurin'
           java-version: '11'
 
       - name: Create settings.xml
