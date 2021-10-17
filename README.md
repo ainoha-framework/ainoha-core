@@ -33,7 +33,7 @@ can be found here:
 <dependency>
     <groupId>com.github.ainoha-framework</groupId>
     <artifactId>ainoha-core</artifactId>
-    <version>1.0.RC5</version>
+    <version>1.0</version>
 </dependency>
 ```
 
